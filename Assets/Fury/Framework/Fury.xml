@@ -1,0 +1,2467 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>Fury</name>
+  </assembly>
+  <members>
+    <member name="T:Fury.Behaviors.Animator">
+      <summary>
+            The animator component is used to add extra information to imported animations.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.LimitIdle">
+      <summary>
+            All speeds below this limit, the character is considered idle.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.LimitWalk">
+      <summary>
+            All speeds below this limit but above LimitIdle, the character is considered walking.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.LimitRun">
+      <summary>
+            All speeds below this limit but above LimitWalk, the character is considered running.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.Idle">
+      <summary>
+            The idle animation.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.Walk">
+      <summary>
+            The walk animation.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.Run">
+      <summary>
+            The run animation.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.Sprint">
+      <summary>
+            The sprint animation.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.IdleBreaks">
+      <summary>
+            Animations that will be played periodically while the character is in its idle state.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.Death">
+      <summary>
+            Death animations.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Animator.Attack">
+      <summary>
+            Attack animations.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Animator.Random``1(``0[])">
+      <summary>
+            Pick a random object from the specified array.
+            </summary>
+      <typeparam name="T">The type, T, of the elements of the array.</typeparam>
+      <param name="arr">An array of elements of type T.</param>
+      <returns>A random element from the array.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Animator.CrossFade(System.String,System.Int32,System.Single,System.Nullable{UnityEngine.QueueMode},UnityEngine.WrapMode)">
+      <summary>
+            Play an animation by name.
+            </summary>
+      <param name="name">The name of the animation to play.</param>
+      <param name="priority">The priority of the animation; higher priority animations will override others.</param>
+      <param name="queueMode">The way the new animation is started.</param>
+      <param name="duration">The length of time to play the animation.</param>
+      <param name="mode">The animation play mode.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Animator.CrossFade(UnityEngine.AnimationClip,UnityEngine.WrapMode)">
+      <summary>
+            Play an animation clip.
+            </summary>
+      <param name="clip">The animation clip to play.</param>
+      <param name="mode">The wrap mode of the clip.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Animator.OnStateChanged(Fury.AnimationStates,Fury.AnimationStates)">
+      <summary>
+            Called by the framework when an animation state is changed.
+            </summary>
+      <param name="oldState">The old state.</param>
+      <param name="newState">The new state.</param>
+    </member>
+    <member name="P:Fury.Behaviors.Animator.Parent">
+      <summary>
+            The parent unit of this animator.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Animator.CurrentState">
+      <summary>
+            The current state of the animator.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Deposit">
+      <summary>
+            A deposit is an entity that does not belong to any player, cannot cast abilities 
+            or have health, but can have tokens. This type of entity is ideal for 'resources'
+            like trees, minerals, gold, etc. It can also be used for chests containing items.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Targetable">
+      <summary>
+            The base class for MonoBehaviours that also implement ITargetable.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.IEntity">
+      <summary>
+            An entity that has a unique identifier and a list of implemented controllers.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.IEntity.SetTag(System.Byte[])">
+      <summary>
+            Set a synchronized tag for this entity. Calling this method directly generates
+            garbage and network traffic. Do not call every frame!
+            </summary>
+      <param name="tag">The byte data.</param>
+    </member>
+    <member name="P:Fury.Behaviors.IEntity.Identifier">
+      <summary>
+            A unique identifier.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.IEntity.Controllers">
+      <summary>
+            A list of controllers implemented by the entity.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Targetable.IsClampedToSurface">
+      <summary>
+            True if the entity should be clamped to the surface during design time.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.IsTeamOrNeutral(Fury.Behaviors.Commander)">
+      <summary>
+            Get the diplomacy status of the entity towards a commander.
+            </summary>
+      <param name="other">A commander.</param>
+      <returns>True if the targetable entity is neutral or teammate of the commander.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.Kill">
+      <summary>
+            Remove the targetable entity from the game.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.CreateTokenStack(Fury.Database.Token,System.Byte[])">
+      <summary>
+            Create a new stack of tokens.
+            </summary>
+      <param name="token">The type of the token.</param>
+      <param name="state">The initial state of the tokens.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.RemoveTokenStack(Fury.Behaviors.Stack)">
+      <summary>
+            Remove a stack from this entity.
+            </summary>
+      <param name="stack">The stack to remove.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.ModifyTokenStackState(Fury.Behaviors.Stack,System.Byte,System.Byte)">
+      <summary>
+            Modify the state of a stack.
+            </summary>
+      <param name="stack">The stack to modify.</param>
+      <param name="index">The index of the state.</param>
+      <param name="val">The new state.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.SetTag(System.Byte[])">
+      <summary>
+            Set a synchronized tag for this entity. Calling this method directly generates
+            garbage and network traffic. Do not call every frame!
+            </summary>
+      <param name="tag">The byte data.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.Equals(System.Object)">
+      <summary>
+            Check for reference equality.
+            </summary>
+      <param name="o">An instance of an obejct.</param>
+      <returns>True if the two objects' references are equal, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.GetHashCode">
+      <summary>
+            Get a hash code for this object.
+            </summary>
+      <returns>A hash code.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.op_Equality(Fury.Behaviors.Targetable,Fury.Behaviors.Targetable)">
+      <summary>
+            Checks for reference equality between two instance. This overrides the standard
+            behavior of Unity, which considers an object to be "null" when it is destroyed.
+            </summary>
+      <param name="a">The first instance.</param>
+      <param name="b">The second instance.</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.op_Inequality(Fury.Behaviors.Targetable,Fury.Behaviors.Targetable)">
+      <summary>
+            Checks for reference inequality between two instance. This overrides the standard
+            behavior of Unity, which considers an object to be "null" when it is destroyed.
+            </summary>
+      <param name="a">The first instance.</param>
+      <param name="b">The second instance.</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:Fury.Behaviors.Targetable.op_Implicit(Fury.Behaviors.Targetable)~System.Int32">
+      <summary>
+            Converts a targetable entity to its identifier.
+            </summary>
+      <param name="tar">A targetable entity.</param>
+      <returns>The entity's identifier.</returns>
+    </member>
+    <member name="P:Fury.Behaviors.Targetable.Identifier">
+      <summary>
+            A unique identifier.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Targetable.Controllers">
+      <summary>
+            A list of controllers implemented by the entity.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Targetable.State">
+      <summary>
+            The current state of the targetable entity.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Targetable.Radius">
+      <summary>
+            The radius of the entity.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Targetable.UserTag">
+      <summary>
+            This is a user-defined tag that is NOT synchronized amongst clients. 
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Targetable.IsDestroyed">
+      <summary>
+            True if the entity has been destroyed, false otherwise.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.IDeposit">
+      <summary>
+            This is a stub created when the CreateDeposit function is called. This stub is necessary because
+            when the CreateDeposit function is called, the deposit is not immediately created. Methods 
+            executed on this stub are buffered and executed on the deposit when it becomes available.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.IDeposit.CreateTokenStack(Fury.Database.Token,System.Byte[])">
+      <summary>
+            Create a new stack of tokens.
+            </summary>
+      <param name="token">The type of the token.</param>
+      <param name="state">The initial state of the tokens.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IDeposit.RemoveTokenStack(Fury.Behaviors.Stack)">
+      <summary>
+            Remove a stack from this entity.
+            </summary>
+      <param name="stack">The stack to remove.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IDeposit.ModifyTokenStackState(Fury.Behaviors.Stack,System.Byte,System.Byte)">
+      <summary>
+            Modify the state of a stack.
+            </summary>
+      <param name="stack">The stack to modify.</param>
+      <param name="index">The index of the state.</param>
+      <param name="val">The new state.</param>
+    </member>
+    <member name="P:Fury.Behaviors.IDeposit.Identifier">
+      <summary>
+            The identifier of the deposit; this is used for network synchronization.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.IDeposit.Properties">
+      <summary>
+            The properties of the deposit.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Deposit.IsTeamOrNeutral(Fury.Behaviors.Commander)">
+      <summary>
+            Deposits are neutral towards all commanders.
+            </summary>
+      <param name="other">A commander.</param>
+      <returns>Always returns true, since deposits are always neutral towards everyone.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Deposit.Kill">
+      <summary>
+            Remove this deposit from the game.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Deposit.Properties">
+      <summary>
+            The properties of the deposit.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Deposit.Radius">
+      <summary>
+            The radius of the deposit.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Stack">
+      <summary>
+            This class describes a 'stack' of a particular token. This is similar to a stack of
+            potions, gold or even equipment in a unit's inventory.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Stack.Identifier">
+      <summary>
+            The internal identifier of the stack.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Stack.Token">
+      <summary>
+            The type of stack. Each stack may only have one type of token.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Stack.States">
+      <summary>
+            A set of custom defined states that will be synchronized. The states have an index
+            from 0 to 255 and a value from 0 to 255. States of a stack can represent the
+            number of objects in a stack (for example, 43 health potions) or the durability
+            of an item. 
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Stack.Owner">
+      <summary>
+            The owner of this stack.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Launcher">
+      <summary>
+            The launcher helps testing single player maps much simpler.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Launcher.Map">
+      <summary>
+            The map name to launch on start up.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Launcher.DebugOnly">
+      <summary>
+            If true, the launcher will only work when the game is run in the Editor.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Rotator">
+      <summary>
+            The rotator behaviour is required in case the follower has a turreted weapon. The
+            rotator allows the framework to automatically rotate parts of the follower to
+            simulate turretted weapons.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Rotator.Speed">
+      <summary>
+            The speed, in radians per second, of the turret.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.IUnit">
+      <summary>
+            This is a stub created when the CreateUnit function is called. This stub is necessary because
+            when the CreateUnit function is called, the unit is not immediately created. Methods executed
+            on this stub are buffered and executed on the unit when it becomes available.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.CreateTokenStack(Fury.Database.Token,System.Byte[])">
+      <summary>
+            Create a new stack of tokens.
+            </summary>
+      <param name="token">The type of the token.</param>
+      <param name="state">The initial state of the tokens.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.RemoveTokenStack(Fury.Behaviors.Stack)">
+      <summary>
+            Remove a stack from this entity.
+            </summary>
+      <param name="stack">The stack to remove.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.ModifyTokenStackState(Fury.Behaviors.Stack,System.Byte,System.Byte)">
+      <summary>
+            Modify the state of a stack.
+            </summary>
+      <param name="stack">The stack to modify.</param>
+      <param name="index">The index of the state.</param>
+      <param name="val">The new state.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.AddStatus(Fury.Database.Status,Fury.Behaviors.Unit)">
+      <summary>
+            Add a status to this targetable entity.
+            </summary>
+      <param name="status">The status to add.</param>
+      <param name="from">The unit that added the status.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.RemoveStatus(Fury.Database.Status)">
+      <summary>
+            Remove a status from this targetable entity.
+            </summary>
+      <param name="status">The status to remove.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.ModifyHealth(System.Int32,Fury.Behaviors.Unit,Fury.Database.ChangeSource)">
+      <summary>
+            Modify this targetable entity's health.
+            </summary>
+      <param name="amount">The amount to modify health by.</param>
+      <param name="from">The unit modifying the health, can be null.</param>
+      <param name="source">The source of the modification, can be an ability, weapon or status effect.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.ModifyEnergy(Fury.Database.Energy,System.Int32)">
+      <summary>
+            Modify the energy of this entity.
+            </summary>
+      <param name="energy">The type of energy to modify.</param>
+      <param name="amount">The change in energy.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.ChangeOwner(Fury.CommanderIndices)">
+      <summary>
+            Change this unit's owner.
+            </summary>
+      <param name="index">The new owner of this unit.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.Order(UnityEngine.Vector3)">
+      <summary>
+            Order the unit to a position.
+            </summary>
+      <param name="position">The position to go to.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.Order(Fury.Behaviors.Targetable)">
+      <summary>
+            Order the unit to target.
+            </summary>
+      <param name="target">The target to attack or move to.</param>
+    </member>
+    <member name="M:Fury.Behaviors.IUnit.Order(Fury.Database.Ability,Fury.Behaviors.Targetable,UnityEngine.Vector3)">
+      <summary>
+            Order a unit to cast an ability.
+            </summary>
+      <param name="ability">The ability to cast.</param>
+      <param name="target">The target to cast the ability on.</param>
+      <param name="pos">The position to cast the ability on.</param>
+    </member>
+    <member name="P:Fury.Behaviors.IUnit.Identifier">
+      <summary>
+            The identifier of the unit; this is used for network synchronization.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.IUnit.Properties">
+      <summary>
+            The properties of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.IUnit.Owner">
+      <summary>
+            The owner of the unit.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.AbilityController">
+      <summary>
+            The ability controller controls the way abilities are cast by units.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.Controller">
+      <summary>
+            Controllers are behaviour-like scripts that are attached to different entities that 
+            implement specific functionality such as inventory, health, etc.
+            </summary>
+    </member>
+    <member name="M:Fury.Controllers.AbilityController.CanCast(Fury.Database.Ability)">
+      <summary>
+            Check if the specified ability can be immediately casted by the unit.
+            </summary>
+      <param name="ability">The ability to locate.</param>
+      <returns>True if the ability can be cast, false otherwise.</returns>
+    </member>
+    <member name="P:Fury.Controllers.AbilityController.State">
+      <summary>
+            The state of the ability controller.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.AbilityController.Cooldowns">
+      <summary>
+            The cooldowns of the abilities.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.AbilityController.CastTimeRemaining">
+      <summary>
+            The time remaining on the cast.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.AbilityController.TargetAbility">
+      <summary>
+            The ability that is currently being cast by the unit. If null, no ability is being cast.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.AbilityController.Target">
+      <summary>
+            The target onto which the ability is being cast.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.AbilityController.TargetPosition">
+      <summary>
+            The position onto which the ability is being cast.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.AbilityController.States">
+      <summary>
+            The various states of the ability controller.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.AbilityController.States.Idle">
+      <summary>
+            No ability is being cast.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.AbilityController.States.Waiting">
+      <summary>
+            An ability is queued, the controller is waiting for the unit to get near its target.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.AbilityController.States.Casting">
+      <summary>
+            The unit is casting an ability.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.ControllerCollection">
+      <summary>
+            A specialized collection used to store controllers. The storage container caches
+            all available controllers for fast and easy access.
+            </summary>
+    </member>
+    <member name="M:Fury.Controllers.ControllerCollection.GetEnumerator">
+      <summary>
+            Returns an enumerator that can be used to inumerate the list.
+            </summary>
+      <returns>Returns an enumerator that can be used to inumerate the list.</returns>
+    </member>
+    <member name="P:Fury.Controllers.ControllerCollection.AbilityController">
+      <summary>
+            Cached ability controller, may be null.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.ControllerCollection.MovementController">
+      <summary>
+            Cached movement controller, may be null.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.ControllerCollection.StatusController">
+      <summary>
+            Cached status controller, may be null.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.ControllerCollection.TagController">
+      <summary>
+            Cached tag controller, may be null.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.ControllerCollection.TokenController">
+      <summary>
+            Cached token controller, may be null.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.ControllerCollection.VitalityController">
+      <summary>
+            Cached vitality controller, may be null.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.ControllerCollection.WeaponController">
+      <summary>
+            Cached weapon controller, may be null.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.MovementController">
+      <summary>
+            The movement controller manages the movement of the entity.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.MovementController.TargetPosition">
+      <summary>
+            The controllers desired target position, null if no position is set.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.MovementController.TargetUnit">
+      <summary>
+            The controller's desired target unit, null if no unit is set.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.MovementController.Velocity">
+      <summary>
+            The velocity of the unit.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.TagController">
+      <summary>
+            The tag controller manages user-defined data, associated with a given entity, that is 
+            serialized by the engine and synchronized amongst all the players.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.TagController.Tag">
+      <summary>
+            The user defined data, as a byte array.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.StatusController">
+      <summary>
+            The status controller controlls the application, maintainence and removal of status effects from a unit.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.Parent">
+      <summary>
+            The parent this status controller belongs to.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.Statuses">
+      <summary>
+            A list of status effects applied to the parent.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.ModifierSpeed">
+      <summary>
+            The total speed modifier from all status effects.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.ModifierHealth">
+      <summary>
+            The total health modifier from all status effects.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.IsStunned">
+      <summary>
+            True if any status effect has stunned the parent, false otherwise.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.IsOrderable">
+      <summary>
+            True if none of the status effects prevent order compliance.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.StatusController.StatusInfo">
+      <summary>
+            Data structure containing information about a single, applied status effect.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.StatusInfo.Properties">
+      <summary>
+            The base properties of the applied status effect.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.StatusInfo.From">
+      <summary>
+            The unit that applied the effect.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.StatusInfo.Remaining">
+      <summary>
+            The time remaining on the status effect.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.StatusInfo.Tag">
+      <summary>
+            An optional, user-defined that is *not* synchronized across the network.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.StatusController.StatusInfo.PeriodRemaining">
+      <summary>
+            Time remaining before a periodic status effect is updated. This is only valid for status effects that 
+            implement the IPeriodic interface.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Unit">
+      <summary>
+            The unit class controls the behaviors of commander-controlled entities.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.AddStatus(Fury.Database.Status,Fury.Behaviors.Unit)">
+      <summary>
+            Add a status to this targetable entity.
+            </summary>
+      <param name="status">The status to add.</param>
+      <param name="from">The unit that added the status.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.RemoveStatus(Fury.Database.Status)">
+      <summary>
+            Remove a status from this targetable entity.
+            </summary>
+      <param name="status">The status to remove.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.ModifyHealth(System.Int32,Fury.Behaviors.Unit,Fury.Database.ChangeSource)">
+      <summary>
+            Modify this targetable entity's health.
+            </summary>
+      <param name="amount">The amount to modify health by.</param>
+      <param name="from">The unit modifying the health, can be null.</param>
+      <param name="source">The source of the modification, can be an ability, weapon or status effect.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.ModifyEnergy(Fury.Database.Energy,System.Int32)">
+      <summary>
+            Modify the energy of this entity.
+            </summary>
+      <param name="energy">The type of energy to modify.</param>
+      <param name="amount">The change in energy.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.ChangeOwner(Fury.CommanderIndices)">
+      <summary>
+            Change this unit's owner.
+            </summary>
+      <param name="index">The new owner of this unit.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.Order(UnityEngine.Vector3)">
+      <summary>
+            Order the unit to a position.
+            </summary>
+      <param name="position">The position to go to.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.Order(Fury.Behaviors.Targetable)">
+      <summary>
+            Order the unit to target.
+            </summary>
+      <param name="target">The target to attack or move to.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.Order(Fury.Database.Ability,Fury.Behaviors.Targetable,UnityEngine.Vector3)">
+      <summary>
+            Order a unit to cast an ability.
+            </summary>
+      <param name="ability">The ability to cast.</param>
+      <param name="target">The target to cast the ability on.</param>
+      <param name="pos">The position to cast the ability on.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.Stop">
+      <summary>
+            Call with extreme caution. This is not multiplayer-synchronized!! If you want the unit to stop doing its
+            current action, call Unit.Order(Unit.position) to stop at its current position.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.Kill">
+      <summary>
+            Remove this unit from the game.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Unit.IsTeamOrNeutral(Fury.Behaviors.Commander)">
+      <summary>
+            Check whether this unit is a teammate or neutral towards the specified commander.
+            </summary>
+      <param name="other">A commander.</param>
+      <returns>True if the unit belongs to a teammate or is neutral.</returns>
+    </member>
+    <member name="P:Fury.Behaviors.Unit.Owner">
+      <summary>
+            The owner of this unit.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Unit.Animator">
+      <summary>
+            A helper class used to animate the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Unit.Properties">
+      <summary>
+            The logic entity that holds data about this game object.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Unit.Radius">
+      <summary>
+            The radius of the unit.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Commander">
+      <summary>
+            The commander behavior is the interface into actual gameplay. This behavior implements many 
+            methods required to control units.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Commander.OrderGroupToPosition(System.Collections.Generic.IEnumerable{Fury.Behaviors.Unit},UnityEngine.Vector3)">
+      <summary>
+            Order a group of units to a position. This method tries to space out the units properly
+            so they don't try to excessively fight for position in their swarm.
+            </summary>
+      <param name="group">A list of units.</param>
+      <param name="position">The position to travel to.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Commander.IsTeam(Fury.Behaviors.Commander)">
+      <summary>
+            Test if a given commander is in the same team as this commander.
+            </summary>
+      <param name="cmdr">A commander to test.</param>
+      <returns>True if the two commanders are in the same team, false otherwise;</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Commander.FindUnits(UnityEngine.Vector3,System.Single,System.Collections.Generic.IList{Fury.Behaviors.Unit})">
+      <summary>
+            Find units owned by this commander that are close enough to a specified position.
+            </summary>
+      <param name="position">A world position.</param>
+      <param name="distance">The maximum inclusion radius.</param>
+      <param name="units">A list which will be populated with units that are within the distance.</param>
+      <returns>The number of units within the specified radius.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Commander.SetTag(System.Byte[])">
+      <summary>
+            Set a synchronized tag for this entity. Calling this method directly generates
+            garbage and network traffic. Do not call every frame!
+            </summary>
+      <param name="tag">The byte data.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Commander.SetIndex(Fury.CommanderIndices)">
+      <summary>
+            Set the commander's index. The index is only changed if it is available.
+            </summary>
+      <param name="newIndex">The new index.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Commander.SetTeam(System.Int32)">
+      <summary>
+            Set the commander's team.
+            </summary>
+      <param name="newTeam">A team.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Commander.op_Implicit(Fury.Behaviors.Commander)~System.Int32">
+      <summary>
+            Implicit operator that converts a Commander into its Int32 identifier.
+            </summary>
+      <param name="cmdr">A commander.</param>
+      <returns>The identifier of the commander.</returns>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.Identifier">
+      <summary>
+            The identifier of the commander.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.Controllers">
+      <summary>
+            The controllers implemented by the commander.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.IsLocal">
+      <summary>
+            True if this commander is the local player, false otherwise.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.IsLoaded">
+      <summary>
+            True if the commander has loaded into the map and is ready for play.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.IsAI">
+      <summary>
+            True if the commander is not controlled by a human player. 
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.Index">
+      <summary>
+            The unique index of the commander.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.Team">
+      <summary>
+            The team this commander belongs to.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Commander.Units">
+      <summary>
+            A dictionary of entities owned by the commander where the key is the 
+            commander-generated instance identifier.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.TokenController">
+      <summary>
+            The token controller manages the 'tokens,' which are like items, that an 
+            entity can posses.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.TokenController.Stacks">
+      <summary>
+            The list of stacks this unit has.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.VitalityController">
+      <summary>
+            The vitality controller allows entities to have health or energy.
+            </summary>
+    </member>
+    <member name="M:Fury.Controllers.VitalityController.HasEnergy(Fury.Database.Energy,System.Int32)">
+      <summary>
+            Check if the unit possesses the amount of the specified energy.
+            </summary>
+      <param name="energy">The energy type the unit must have.</param>
+      <param name="amt">The amount of energy the unit must have.</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.Generators">
+      <summary>
+            The energy generators associated with this unit.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.Health">
+      <summary>
+            The health of the entity.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.HealthPercentage">
+      <summary>
+            The current health of the entity as a percentage.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.MaxHealth">
+      <summary>
+            The maximum health of the entity, including the base health defined under properties and
+            any bonuses applied through statuses.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.LastAttacker">
+      <summary>
+            The last unit that damaged this unit.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.LastHealer">
+      <summary>
+            The last unit that healed this unit.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.VitalityController.Generator">
+      <summary>
+            Contains information about a type of energy this unit may possess.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.Generator.Cooldown">
+      <summary>
+            The amount of time before the generator replenishes some of its energy.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.Generator.Amount">
+      <summary>
+            The amount of energy currently in the generator.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.Generator.Properties">
+      <summary>
+            The properties defined for the generator.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.VitalityController.Generator.AmountPercentage">
+      <summary>
+            The percentage of energy in the generator.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.WeaponController">
+      <summary>
+            The weapon controller allows entities to use a weapon.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.WeaponController.Target">
+      <summary>
+            The target of the weapon controller.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.WeaponController.State">
+      <summary>
+            The current state of the weapon controller.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.WeaponController.TimeInState">
+      <summary>
+            The time spent in the state.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.WeaponController.Parent">
+      <summary>
+            The unit the weapon controller is attached to.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.WeaponController.IsUsable">
+      <summary>
+            True if the weapon can be used, false otherwise.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.WeaponController.InUse">
+      <summary>
+            True if the weapon is in use, false otherwise. A weapon is considered 'in use' if it is
+            during its PreDelay or PostDelay states.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.WeaponController.IsTargetOutOfRange">
+      <summary>
+            True if the target of the weapon controller is out of its range, false otherwise.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.WeaponController.Properties">
+      <summary>
+            The properties of the weapon, as defined at startup.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.WeaponController.States">
+      <summary>
+            The states the weapon can be in.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.WeaponController.States.Queued">
+      <summary>
+            The attack has been queued by the server, and the command will soon be 
+            broadcasted to connected clients.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.WeaponController.States.PreDelay">
+      <summary>
+            The delay before the attack is considered 'complete.' This time is similar
+            to a character preparing his weapon for an attack.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.WeaponController.States.PostDelay">
+      <summary>
+            The delay after the attack before the cooldown period begins. This time is
+            similar to a character resetting his weapon after an attack.
+            </summary>
+    </member>
+    <member name="F:Fury.Controllers.WeaponController.States.Cooldown">
+      <summary>
+            The time after which the weapon can be used again. This time is similar
+            to a reload period of some kind.
+            </summary>
+    </member>
+    <member name="T:Fury.Info">
+      <summary>
+            Provides versioning and licensing information for the product.
+            </summary>
+    </member>
+    <member name="F:Fury.Info.IsTrial">
+      <summary>
+            True if the product is running in trial mode, false otherwise.
+            </summary>
+    </member>
+    <member name="P:Fury.Info.Revision">
+      <summary>
+            The current revision of the project.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Ability">
+      <summary>
+            This class describes the base functions necessary to create an ability.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.ChangeSource">
+      <summary>
+            A damage source is either an Ability, Status or Weapon.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Definition">
+      <summary>
+            The root class from which all definitions derrive from.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Definition.GetHashCode">
+      <summary>
+            Get a unique hashcode for this definition.
+            </summary>
+      <returns>A unique hashcode guaranteed to not cause collisions with other definitions.</returns>
+    </member>
+    <member name="M:Fury.Database.Definition.op_Implicit(Fury.Database.Definition)~System.Int32">
+      <summary>
+            A definition can be found by its identifier.
+            </summary>
+      <param name="i">The definition.</param>
+      <returns>The identifier of the definition.</returns>
+    </member>
+    <member name="P:Fury.Database.Definition.DefinitionID">
+      <summary>
+            The unique identifier of this definition.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Definition.Name">
+      <summary>
+            The name of the definition.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Ability.OnCheckUse(Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine to check whether an ability is usable at all.
+            </summary>
+      <param name="caster">The unit that will cast the ability.</param>
+      <returns>True if the ability can be used, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.Database.Ability.OnCheckUseOnTarget(Fury.Behaviors.Unit,Fury.Behaviors.Targetable,UnityEngine.Vector3)">
+      <summary>
+            Called by the engine to check whether the ability is usable on a target or location.
+            </summary>
+      <param name="caster">The unit that will cast the ability.</param>
+      <param name="target">The target unit of the ability.</param>
+      <param name="position">The target position of the ability.</param>
+      <returns>True if the ability can be used on the target, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.Database.Ability.OnBeginCast(Fury.Behaviors.Unit,Fury.Behaviors.Targetable,UnityEngine.Vector3)">
+      <summary>
+            Called by the engine when the ability has begun to be cast.
+            </summary>
+      <param name="caster">The unit that will cast the ability.</param>
+      <param name="target">The target unit of the ability.</param>
+      <param name="position">The target position of the ability.</param>
+      <returns>An optional user-defined tag that is *not* synchronized across clients.</returns>
+    </member>
+    <member name="M:Fury.Database.Ability.OnChannel(System.Object,System.Single,Fury.Behaviors.Unit,Fury.Behaviors.Targetable,UnityEngine.Vector3)">
+      <summary>
+            Called by the engine when the ability is being cast or channeled.
+            </summary>
+      <param name="tag">An optional user-defined tag that is *not* synchronized across clients.</param>
+      <param name="time">The time left before the channel is complete.</param>
+      <param name="caster">The unit that is casting the ability.</param>
+      <param name="target">The target unit of the ability.</param>
+      <param name="position">The target position of the ability.</param>
+      <returns>An optional user-defined tag that is *not* synchronized across clients. The tag will be passed along to methods.</returns>
+    </member>
+    <member name="M:Fury.Database.Ability.OnInterruptedCast(System.Object,Fury.Behaviors.Unit,Fury.Behaviors.Targetable,UnityEngine.Vector3)">
+      <summary>
+            Called by the engine when the ability channel has been interrupted.
+            </summary>
+      <param name="tag">An optional user-defined tag that is *not* synchronized across clients.</param>
+      <param name="caster">The unit that was casting the ability.</param>
+      <param name="target">The target unit of the ability.</param>
+      <param name="position">The target position of the ability.</param>
+    </member>
+    <member name="M:Fury.Database.Ability.OnEndCast(System.Object,Fury.Behaviors.Unit,Fury.Behaviors.Targetable,UnityEngine.Vector3)">
+      <summary>
+            Called by the engine when the ability channel has been completed.
+            </summary>
+      <param name="tag">An optional user-defined tag that is *not* synchronized across clients.</param>
+      <param name="caster">The unit that was casting the ability.</param>
+      <param name="target">The target unit of the ability.</param>
+      <param name="position">The target position of the ability.</param>
+      <returns>An optional user-defined tag that is *not* synchronized across clients. The tag will be passed along if the ability launches a projectile.</returns>
+    </member>
+    <member name="P:Fury.Database.Ability.Icon">
+      <summary>
+            The icon texture of the ability. This field is optional.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Ability.Effect">
+      <summary>
+            A variable to store the effect. This field is optional.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Ability.CastTime">
+      <summary>
+            The cast time of the ability in seconds.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Ability.CastMobile">
+      <summary>
+            True if the ability can be cast while the unit is moving.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Ability.CastRange">
+      <summary>
+            The cast range of the ability.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Ability.CastCooldown">
+      <summary>
+            The cooldown of the ability in seconds.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Ability.RequiresTarget">
+      <summary>
+            True if the ability requires a target, false otherwise.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Deposit">
+      <summary>
+            A deposit is an entity that does not belong to any player, cannot cast abilities 
+            or have health, but can have tokens. This type of entity is ideal for 'resources'
+            like trees, minerals, gold, etc. It can also be used for chests containing items.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Targetable">
+      <summary>
+            Base definition for physical objects such as deposits and units.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Targetable.Prefab">
+      <summary>
+            The prefab used by this unit.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Targetable.Icon">
+      <summary>
+            The icon name or path of the entity. This field is optional.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Targetable.Radius">
+      <summary>
+            The radius of the entity.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Targetable.Height">
+      <summary>
+            The height of the entity.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Deposit.OnRemoved(Fury.Behaviors.Deposit)">
+      <summary>
+            Called by the framework when the deposit is removed from the game.
+            </summary>
+      <param name="deposit">The deposit that was removed.</param>
+    </member>
+    <member name="M:Fury.Database.Deposit.OnCreated(Fury.Behaviors.Deposit)">
+      <summary>
+            Called by the framework when the deposit is created.
+            </summary>
+      <param name="deposit">The deposit that was created.</param>
+    </member>
+    <member name="T:Fury.Database.Energy">
+      <summary>
+            This class defines an energy type that will be present in the game. Energies are similar to things
+            such as mana, power etc.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Generator">
+      <summary>
+            A generator defines an entity's "energy bar." This is similar to common energy types
+            like mana, stamina, etc. A unit can have multiple energy types.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Generator.Energy">
+      <summary>
+            The energy this generator uses.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Generator.Capacity">
+      <summary>
+            The total capacity the entity can pool up.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Generator.RegenPeriod">
+      <summary>
+            The duration between regenerations.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Generator.RegenAmount">
+      <summary>
+            The amount to be regenerated per period, can be negative.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Commander">
+      <summary>
+            Defines a potential commander on a map.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Commander.CommanderType">
+      <summary>
+            Commanders can be set to human only, computer only or both.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Commander.IsRequired">
+      <summary>
+            True if this commander is required for the game to launch.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Commander.DefaultTeam">
+      <summary>
+            The default team of the commander
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Commander.LockedTeams">
+      <summary>
+            If true, this commander cannot change its teams.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Commander.DefaultIndex">
+      <summary>
+            The index of this commander, assigned automatically.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Status">
+      <summary>
+            A status is an effect that is applied to units, similar to 'buffs' and 'debuffs' in RPG style games.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.OnStatusAdded(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine when this status effect is applied to a unit.
+            </summary>
+      <param name="target">The unit onto which the status effect was applied.</param>
+      <param name="from">The unit that applied the status effect.</param>
+      <returns>An optional application defined tag, that is *not* synchronized between clients.</returns>
+    </member>
+    <member name="M:Fury.Database.Status.OnStatusRemoved(System.Object,Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine when this status effect is removed from a unit.
+            </summary>
+      <param name="tag">An optional application defined tag, that is *not* synchronized between clients.</param>
+      <param name="target">The unit from which the status effect was removed.</param>
+      <param name="from">The unit that originally applied the status effect.</param>
+    </member>
+    <member name="P:Fury.Database.Status.Effect">
+      <summary>
+            The graphical effect associated with this status. This is an optional field.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Status.Duration">
+      <summary>
+            The duration of the status.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Status.IOrderable">
+      <summary>
+            The engine will prevent the unit from being ordered around. This is useful
+            for 'confuse' or 'berserk' type effects where the unit becomes unresponsive to orders.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.IOrderable.IsOrderable(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine to determine if the unit can be ordered by its commander.
+            </summary>
+      <param name="from">The unit that applied the effect.</param>
+      <param name="target">The unit the status effect is applied to.</param>
+      <returns>True if the unit can be controlled, false otherwise.</returns>
+    </member>
+    <member name="T:Fury.Database.Status.IHealth">
+      <summary>
+            The engine will modify the maximum health of the character by the 
+            given amount. The maximum health will not fall below one.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.IHealth.GetModifier(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine to determine the maximum health of the target.
+            </summary>
+      <param name="from">The unit that applied the effect.</param>
+      <param name="target">The unit the status effect is applied to.</param>
+      <returns>The amount of health that should be added to the target's maximum health.</returns>
+    </member>
+    <member name="T:Fury.Database.Status.ISpeed">
+      <summary>
+            The engine will modify the maximum speed of the character. A value of
+            zero will freeze the character, while a value of two would make the
+            character twice as fast.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.ISpeed.GetModifier(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine to calculate the speed modifier of the target.
+            </summary>
+      <param name="from">The unit that applied the effect.</param>
+      <param name="target">The unit the status effect is applied to.</param>
+      <returns>The percent modification to be applied to the speed of the target.</returns>
+    </member>
+    <member name="T:Fury.Database.Status.IHealthChange">
+      <summary>
+            This interface can be used to amplify the change in health (healing or damage) to this unit.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.IHealthChange.GetModifier(Fury.Behaviors.Unit,Fury.Behaviors.Unit,Fury.Database.ChangeSource,System.Int32)">
+      <summary>
+            Called by the engine when a unit's health is being changed.
+            </summary>
+      <param name="target">The entity whose health will be changed.</param>
+      <param name="changer">The unit that will change the health.</param>
+      <param name="source">The source that will change the health; can be a weapon, ability or status.</param>
+      <param name="baseAmount">The base amount of change.</param>
+      <returns>The amount to amplify the change by.</returns>
+    </member>
+    <member name="T:Fury.Database.Status.IHealthChangeCaused">
+      <summary>
+            This interface can be used to amplify the change in health (healing or damage) caused by this unit.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.IHealthChangeCaused.GetModifier(Fury.Behaviors.Unit,Fury.Behaviors.Unit,Fury.Database.ChangeSource,System.Int32)">
+      <summary>
+            Called by the engine when a unit changes another unit's health.
+            </summary>
+      <param name="changer">The unit that is changing the health.</param>
+      <param name="target">The unit whose health will be changed.</param>
+      <param name="source">The source of the change; can be a weapon, ability or status.</param>
+      <param name="baseAmount">The base amount of change.</param>
+      <returns>The amount to amplify the change by.</returns>
+    </member>
+    <member name="T:Fury.Database.Status.IStun">
+      <summary>
+            The engine will stun the unit, preventing any action and cancelling all casts and orders.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.IStun.IsStunned(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine to determine if this status effect stuns the target.
+            </summary>
+      <param name="from">The unit that applied the effect.</param>
+      <param name="target">The unit the status effect is applied to.</param>
+      <returns>True if the target should be stunned, false otherwise.</returns>
+    </member>
+    <member name="T:Fury.Database.Status.IPeriodic">
+      <summary>
+            The engine periodically allows the status to run code.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Status.IPeriodic.OnUpdate(System.Object,Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine periodically.
+            </summary>
+      <param name="tag">An optional user-defined tag. The tag is *not* synchronized between clients.</param>
+      <param name="unit">The unit afflicted by the status effect.</param>
+      <param name="from">The unit that originally applied the status effect.</param>
+      <returns>An optional, user-defined tag that will be passed onto subsequent update calls.</returns>
+    </member>
+    <member name="P:Fury.Database.Status.IPeriodic.Period">
+      <summary>
+            The period of time between the update function calls.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Token">
+      <summary>
+            Defines a token, which is somewhat like an item. Tokens can be used for points,
+            currencies, resources or items.
+            </summary>
+    </member>
+    <member name="F:Fury.Database.Token.Icon">
+      <summary>
+            The icon of the token, this field is optional.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Token.OnTokenStackStateChanged(Fury.Behaviors.Stack,System.Byte,System.Int16,System.Int16)">
+      <summary>
+            Fired when a stack containing this type of tokens is changed.
+            </summary>
+      <param name="stack">The stack that was changed.</param>
+      <param name="index">The index of the state.</param>
+      <param name="oldVal">The old value of the state.</param>
+      <param name="newVal">The new value of the state.</param>
+    </member>
+    <member name="M:Fury.Database.Token.OnTokenStackCreated(Fury.Behaviors.Stack)">
+      <summary>
+            Fired when a stack is created.
+            </summary>
+      <param name="stack">The stack that was created.</param>
+    </member>
+    <member name="M:Fury.Database.Token.OnTokenStackRemoved(Fury.Behaviors.Stack)">
+      <summary>
+            Fired when a stack is removed.
+            </summary>
+      <param name="stack">The stack that was removed.</param>
+    </member>
+    <member name="T:Fury.GameStates">
+      <summary>
+            The states the game can be in.
+            </summary>
+    </member>
+    <member name="F:Fury.GameStates.Menu">
+      <summary>
+            The user is in the game menus.
+            </summary>
+    </member>
+    <member name="F:Fury.GameStates.Lobby">
+      <summary>
+            The user is in the lobby of a game.
+            </summary>
+    </member>
+    <member name="F:Fury.GameStates.Loading">
+      <summary>
+            The user is loading the map.
+            </summary>
+    </member>
+    <member name="F:Fury.GameStates.Playing">
+      <summary>
+            The user is playing the game.
+            </summary>
+    </member>
+    <member name="T:Fury.UnitStates">
+      <summary>
+            The states the unit can be in.
+            </summary>
+    </member>
+    <member name="F:Fury.UnitStates.UnloadedOrEditor">
+      <summary>
+            This is the state of the entity during design (editor) time, or if it is 
+            sitting unloaded in the scene.
+            </summary>
+    </member>
+    <member name="F:Fury.UnitStates.Initializing">
+      <summary>
+            The entity is currently initializing itself.
+            </summary>
+    </member>
+    <member name="F:Fury.UnitStates.Idle">
+      <summary>
+            The unit is idle. It will fire at hostile entities but not move.
+            </summary>
+    </member>
+    <member name="F:Fury.UnitStates.AttackingUnit">
+      <summary>
+            The unit is attacking a unit.
+            </summary>
+    </member>
+    <member name="F:Fury.UnitStates.MovingToPosition">
+      <summary>
+            The unit is moving to a position.
+            </summary>
+    </member>
+    <member name="F:Fury.UnitStates.MovingToTarget">
+      <summary>
+            The unit is moving to a unit.
+            </summary>
+    </member>
+    <member name="F:Fury.UnitStates.CastingAbility">
+      <summary>
+            The unit is traveling to cast or casting an ability.
+            </summary>
+    </member>
+    <member name="T:Fury.RPCPermissions">
+      <summary>
+            The RPC permission levels.
+            </summary>
+    </member>
+    <member name="T:Fury.CommanderIndices">
+      <summary>
+            The indices available to commanders, up to thirty two.
+            </summary>
+    </member>
+    <member name="T:Fury.AnimationStates">
+      <summary>
+            The different animation states of an Animator.
+            </summary>
+    </member>
+    <member name="T:Fury.OrderTypes">
+      <summary>
+            The different orders that can be given to a unit.
+            </summary>
+    </member>
+    <member name="T:Fury.CommanderTypes">
+      <summary>
+            The type of commander.
+            </summary>
+    </member>
+    <member name="T:Fury.General.DPredicate`1">
+      <summary>
+            Used by the search functions to support lamba-style queries.
+            </summary>
+      <typeparam name="T0">The type of the argument.</typeparam>
+      <param name="item">The argument.</param>
+      <returns>True if argument matches the predicate, false otherwise.</returns>
+    </member>
+    <member name="T:Fury.General.Action">
+      <summary>
+            Generic delegate.
+            </summary>
+    </member>
+    <member name="T:Fury.General.Action`1">
+      <summary>
+            Generic delegate.
+            </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="t">An argument.</param>
+    </member>
+    <member name="T:Fury.General.DUnitDead">
+      <summary>
+            Used by the OnUnitDead event.
+            </summary>
+      <param name="deadUnit">The unit that died.</param>
+      <param name="lastAttacker">The last attacker of the unit.</param>
+    </member>
+    <member name="T:Fury.General.DOrderGiven">
+      <summary>
+            Used by the OnOrderGiven event.
+            </summary>
+      <param name="orderedUnit">The unit that was ordered.</param>
+      <param name="orderType">The type of order.</param>
+    </member>
+    <member name="T:Fury.General.DStatusAdded">
+      <summary>
+            Used by the OnStatusAdded event.
+            </summary>
+      <param name="target">The unit that had the status added.</param>
+      <param name="from">The unit that added the status, can be null.</param>
+      <param name="status">The status that was added.</param>
+    </member>
+    <member name="T:Fury.General.DStatusRemoved">
+      <summary>
+            Used by the OnStatusRemoved event.
+            </summary>
+      <param name="target">The unit from which the status was removed.</param>
+      <param name="from">The original unit that applied the status, can be null.</param>
+      <param name="status">The type of status that was removed.</param>
+    </member>
+    <member name="T:Fury.General.DEnergyAmountChanged">
+      <summary>
+            Used by the OnEnergyAmountChanged event.
+            </summary>
+      <param name="target">The unit that had its energy changed.</param>
+      <param name="energy">The type of energy that was changed.</param>
+      <param name="amount">The amount of energy that was changed.</param>
+    </member>
+    <member name="T:Fury.General.DUnitEnterTrigger">
+      <summary>
+            Used by the OnUnitEnterTrigger event.
+            </summary>
+      <param name="unit">The unit that entered the trigger.</param>
+      <param name="other">The collider of the trigger.</param>
+    </member>
+    <member name="T:Fury.General.DTokenStackStateChanged">
+      <summary>
+            Used by the OnTokenStackStateChagned event.
+            </summary>
+      <param name="stack">The stack that was changed.</param>
+      <param name="index">The index of the state.</param>
+      <param name="oldVal">The old value of the state.</param>
+      <param name="newVal">The new value of the state.</param>
+    </member>
+    <member name="T:Fury.General.DHealthAmountChanged">
+      <summary>
+            Used by the OnHealthAmountChanged event.
+            </summary>
+      <param name="target">The unit that had its health changed.</param>
+      <param name="changer">The unit that changed the health, can be null.</param>
+      <param name="src">The source of the change; can be a weapon, ability or status.</param>
+      <param name="amount">The amount of health that was changed.</param>
+    </member>
+    <member name="T:Fury.General.ReadOnlyDictionary`2">
+      <summary>
+            A read-only dictionary.
+            </summary>
+      <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+      <typeparam name="TValue">The type of values in the dictionary.</typeparam>
+    </member>
+    <member name="M:Fury.General.ReadOnlyDictionary`2.TryGetValue(`0,`1@)">
+      <summary>
+            Try to get the value associated with the specified key.
+            </summary>
+      <param name="key">The key of the value to get.</param>
+      <param name="val">Contains the value of the key when the method returns.</param>
+      <returns>True if a value was found, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.General.ReadOnlyDictionary`2.ContainsKey(`0)">
+      <summary>
+            Determines whether the dictionary contains the key.
+            </summary>
+      <param name="key">The key to locate.</param>
+      <returns>True if the key exists in the dictionary, false otherwise.</returns>
+    </member>
+    <member name="P:Fury.General.ReadOnlyDictionary`2.Item(`0)">
+      <summary>
+            Retrieve a value by its key.
+            </summary>
+      <param name="key">The key of the value.</param>
+      <returns>The value associated wit the key. If no value is found, the default value of T is returned.</returns>
+    </member>
+    <member name="P:Fury.General.ReadOnlyDictionary`2.Keys">
+      <summary>
+            Get a collection containing the keys of the dictionary.
+            </summary>
+    </member>
+    <member name="P:Fury.General.ReadOnlyDictionary`2.Count">
+      <summary>
+            The number of keys in the dictionary.
+            </summary>
+    </member>
+    <member name="P:Fury.General.ReadOnlyDictionary`2.Values">
+      <summary>
+            The values of this collection.
+            </summary>
+    </member>
+    <member name="T:Fury.General.ReadOnlyDictionary`2.ValueEnumerator">
+      <summary>
+            A special enumerator that minimizes allocations. This enumerator uses object pooling
+            and wraps around the native value-type enumerator that causes boxing in foreach statements.
+            This enumerator also buffers the dictionary's values which allows for modification of the
+            collection during enumeration. 
+            </summary>
+    </member>
+    <member name="M:Fury.General.ReadOnlyDictionary`2.ValueEnumerator.Dispose">
+      <summary>
+            Dispose of the enumerator.
+            </summary>
+    </member>
+    <member name="M:Fury.General.ReadOnlyDictionary`2.ValueEnumerator.MoveNext">
+      <summary>
+            Move the enumerator to the next position.
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:Fury.General.ReadOnlyDictionary`2.ValueEnumerator.Reset">
+      <summary>
+            Reset the enumerator.
+            </summary>
+    </member>
+    <member name="P:Fury.General.ReadOnlyDictionary`2.ValueEnumerator.Current">
+      <summary>
+            Get the element at the current position.
+            </summary>
+    </member>
+    <member name="T:Fury.General.ReadOnlyList`1">
+      <summary>
+            A read-only list.
+            </summary>
+      <typeparam name="T">The type of the elements in the list.</typeparam>
+    </member>
+    <member name="M:Fury.General.ReadOnlyList`1.First(Fury.General.DPredicate{`0})">
+      <summary>
+            Search the list and find the first element using the predicate. This function is equivalent
+            to the LINQ query FirstOrDefault.
+            </summary>
+      <param name="predicate">A predicate, which can be a lambda function.</param>
+      <returns>An element if one is found, otherwise default(T).</returns>
+    </member>
+    <member name="M:Fury.General.ReadOnlyList`1.Contains(`0)">
+      <summary>
+            Determines whether the list contains the element.
+            </summary>
+      <param name="value">The object to locate int the list.</param>
+      <returns>True if the list contains the value, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.General.ReadOnlyList`1.GetEnumerator">
+      <summary>
+            Returns an enumerater that can be used to inumerate the the list.
+            </summary>
+      <returns>An enumerator.</returns>
+    </member>
+    <member name="P:Fury.General.ReadOnlyList`1.Item(System.Int32)">
+      <summary>
+            Gets the element at the specified index.
+            </summary>
+      <param name="index">A zero-based index.</param>
+      <returns>The element at the specified index.</returns>
+    </member>
+    <member name="P:Fury.General.ReadOnlyList`1.Count">
+      <summary>
+            Gets the number of elements in the list.
+            </summary>
+    </member>
+    <member name="T:Fury.General.ReadOnlyList`1.Enumerator">
+      <summary>
+            A special enumerator for the read only list that minimizes memory allocations 
+            during foreach loops.
+            </summary>
+    </member>
+    <member name="M:Fury.General.ReadOnlyList`1.Enumerator.Dispose">
+      <summary>
+            Disposes of the enumerator.
+            </summary>
+    </member>
+    <member name="M:Fury.General.ReadOnlyList`1.Enumerator.MoveNext">
+      <summary>
+            Moves to the next position.
+            </summary>
+      <returns>True if the move was successful, false if the collection ended.</returns>
+    </member>
+    <member name="M:Fury.General.ReadOnlyList`1.Enumerator.Reset">
+      <summary>
+            Resets the enumerator, not implemented.
+            </summary>
+    </member>
+    <member name="P:Fury.General.ReadOnlyList`1.Enumerator.Current">
+      <summary>
+            Gets the element at the current position of the enumerator.
+            </summary>
+    </member>
+    <member name="T:Fury.Hud">
+      <summary>
+            Helper class to make user-interface tasks a little bit easier.
+            </summary>
+    </member>
+    <member name="M:Fury.Hud.ConsumeLMB">
+      <summary>
+            Consume the left mouse button click so multiple scripts aren't run off the same trigger.
+            </summary>
+    </member>
+    <member name="M:Fury.Hud.ConsumeRMB">
+      <summary>
+            Consume the right mouse button click so multiple scripts aren't run off the same trigger.
+            </summary>
+    </member>
+    <member name="M:Fury.Hud.PanCameraTo(UnityEngine.Vector3,System.Single)">
+      <summary>
+            Focus the camera onto the specified world point.
+            </summary>
+      <param name="pos">A point in world space.</param>
+      <param name="distance">The distance from the position.</param>
+    </member>
+    <member name="M:Fury.Hud.PanCamera(System.Single,System.Single)">
+      <summary>
+            Pan the main camera around. The camera's true forward vector is projected onto the XZ plane
+            to simulate typical RTS/Overhead movement styles.
+            </summary>
+      <param name="dForward">The units to go forward, can be negative to go backwards. </param>
+      <param name="dRight">The units to go right, can be negative to go left.</param>
+    </member>
+    <member name="M:Fury.Hud.CalculateFocus(UnityEngine.Ray)">
+      <summary>
+            Calculate the the focus of the ray.
+            </summary>
+      <param name="ray">A ray, should usually be from the camera center, straight outwards.</param>
+    </member>
+    <member name="M:Fury.Hud.CalculateUnitsInRect(UnityEngine.Rect,System.Collections.Generic.IList{Fury.Behaviors.Unit})">
+      <summary>
+            Calculate all the units that are inside the specified screen-space rectangle.
+            </summary>
+      <param name="r">The rectangle to test.</param>
+      <param name="buffer">The list that will be populated with all units that are inside the rectangle.</param>
+    </member>
+    <member name="M:Fury.Hud.QueueGetCaster(UnityEngine.Vector3)">
+      <summary>
+            Get a caster that is the closest to the specified point and is ready to cast the 
+            queued ability. Casters will only be picked from those supplied in the QueueAbility call.
+            </summary>
+      <param name="point">A point, in world space. Should usually be the target of the queued ability.</param>
+      <returns>A caster if one is ready to cast the ability.</returns>
+    </member>
+    <member name="M:Fury.Hud.QueueAbility(Fury.Database.Ability,System.Collections.Generic.IEnumerable{Fury.Behaviors.Unit})">
+      <summary>
+            Queue an ability and a list of casters that could potentially cast that ability.
+            </summary>
+      <param name="ability">The ability to queue.</param>
+      <param name="casters">The potential list of casters.</param>
+    </member>
+    <member name="P:Fury.Hud.Shift">
+      <summary>
+            True if shift was down in the last frame, false otherwise.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.TriggerLMB">
+      <summary>
+            True if the left mouse button was clicked. If this trigger is used, call ConsumeLMB()
+            to insure that one click isn't processed multiple times by overlapping components.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.TriggerRMB">
+      <summary>
+            True if the right mouse button was clicked. If this trigger is used, call ConsumeRMB()
+            to insure that one click isn't processed multiple times by overlapping components.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.QueuedAbility">
+      <summary>
+            An abilit that was queued up with QueueAbility().
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.QueuedAbilityCasters">
+      <summary>
+            A list of units that can cast the QueuedAbility.
+            </summary>
+    </member>
+    <member name="E:Fury.Hud.OnDragComplete">
+      <summary>
+            The event is fired when the user completes a drag action on the screen.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.Position">
+      <summary>
+            The position of the mouse pointer that is constrained to the screen.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.SensitivityMouse">
+      <summary>
+            The rate at which the mouse moves.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.SelectionBox">
+      <summary>
+            The selection box, in screen space. If the user isn't in the process of drag selecting units,
+            this value is set to null.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.FocusPoint">
+      <summary>
+            The position that the user's mouse is focusing on, in world space.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.FocusTarget">
+      <summary>
+            The target that the user's mouse is focusing on.
+            </summary>
+    </member>
+    <member name="P:Fury.Hud.UnitMask">
+      <summary>
+            The layer mask that units use.
+            </summary>
+    </member>
+    <member name="T:Fury.Controllers.SelectionController">
+      <summary>
+            A helper collection that is designed for units currently selected by the player.
+            </summary>
+    </member>
+    <member name="M:Fury.Controllers.SelectionController.#ctor">
+      <summary>
+            Create an empty unit collection.
+            </summary>
+    </member>
+    <member name="M:Fury.Controllers.SelectionController.Add(Fury.Behaviors.Unit)">
+      <summary>
+            Add a unit to the collection.
+            </summary>
+      <param name="unit">The unit to add.</param>
+    </member>
+    <member name="M:Fury.Controllers.SelectionController.Remove(Fury.Behaviors.Unit)">
+      <summary>
+            Remove a unit from the collection.
+            </summary>
+      <param name="unit">The unit to remove.</param>
+    </member>
+    <member name="M:Fury.Controllers.SelectionController.Clear">
+      <summary>
+            Clear the selection of all units.
+            </summary>
+    </member>
+    <member name="M:Fury.Controllers.SelectionController.Contains(Fury.Behaviors.Unit)">
+      <summary>
+            Check if a unit is contained in the selection.
+            </summary>
+      <param name="unit">The unit to find.</param>
+      <returns>True if the unit is in the selected collection, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.Controllers.SelectionController.GetEnumerator">
+      <summary>
+            Returns an enumerator that can be used to iterate through the dictionary.
+            </summary>
+      <returns>An enumerator.</returns>
+    </member>
+    <member name="M:Fury.Controllers.SelectionController.Prune">
+      <summary>
+            Prune the selected collection of dead units.
+            </summary>
+    </member>
+    <member name="P:Fury.Controllers.SelectionController.Units">
+      <summary>
+            The table of units currently selected.
+            </summary>
+    </member>
+    <member name="E:Fury.Controllers.SelectionController.OnUnitSelected">
+      <summary>
+            Called when a unit is selected.
+            </summary>
+    </member>
+    <member name="E:Fury.Controllers.SelectionController.OnUnitDeselected">
+      <summary>
+            Called when a unit is deselected.
+            </summary>
+    </member>
+    <member name="T:Fury.General.Heap`1">
+      <summary>
+            A binary heap, useful for sorting data and priority queues.
+            </summary>
+      <typeparam name="T"><![CDATA[IComparable<T> type of item in the heap]]>.</typeparam>
+    </member>
+    <member name="M:Fury.General.Heap`1.#ctor">
+      <summary>
+            Creates a new binary heap.
+            </summary>
+    </member>
+    <member name="M:Fury.General.Heap`1.Peek">
+      <summary>
+            Gets the first value in the heap without removing it.
+            </summary>
+      <returns>The lowest value of type TValue.</returns>
+    </member>
+    <member name="M:Fury.General.Heap`1.Clear">
+      <summary>
+            Removes all items from the heap.
+            </summary>
+    </member>
+    <member name="M:Fury.General.Heap`1.Add(`0)">
+      <summary>
+            Adds a key and value to the heap.
+            </summary>
+      <param name="item">The item to add to the heap.</param>
+    </member>
+    <member name="M:Fury.General.Heap`1.Remove">
+      <summary>
+            Removes and returns the first item in the heap.
+            </summary>
+      <returns>The next value in the heap.</returns>
+    </member>
+    <member name="M:Fury.General.Heap`1.Copy">
+      <summary>
+            Creates a new instance of an identical binary heap.
+            </summary>
+      <returns>A BinaryHeap.</returns>
+    </member>
+    <member name="M:Fury.General.Heap`1.GetEnumerator">
+      <summary>
+            Gets an enumerator for the binary heap.
+            </summary>
+      <returns>An IEnumerator of type T.</returns>
+    </member>
+    <member name="M:Fury.General.Heap`1.Contains(`0)">
+      <summary>
+            Checks to see if the binary heap contains the specified item.
+            </summary>
+      <param name="item">The item to search the binary heap for.</param>
+      <returns>A boolean, true if binary heap contains item.</returns>
+    </member>
+    <member name="M:Fury.General.Heap`1.CopyTo(`0[],System.Int32)">
+      <summary>
+            Copies the binary heap to an array at the specified index.
+            </summary>
+      <param name="array">One dimensional array that is the destination of the copied elements.</param>
+      <param name="arrayIndex">The zero-based index at which copying begins.</param>
+    </member>
+    <member name="M:Fury.General.Heap`1.Remove(`0)">
+      <summary>
+            Removes an item from the binary heap. This utilizes the type T's Comparer and will not remove duplicates.
+            </summary>
+      <param name="item">The item to be removed.</param>
+      <returns>Boolean true if the item was removed.</returns>
+    </member>
+    <member name="P:Fury.General.Heap`1.Count">
+      <summary>
+            Gets the number of values in the heap. 
+            </summary>
+    </member>
+    <member name="P:Fury.General.Heap`1.Capacity">
+      <summary>
+            Gets or sets the capacity of the heap.
+            </summary>
+    </member>
+    <member name="P:Fury.General.Heap`1.IsReadOnly">
+      <summary>
+            Gets whether or not the binary heap is readonly.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Map">
+      <summary>
+            Holds static data about a map.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Map.Commanders">
+      <summary>
+            The default commanders found on the map.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Map.Scene">
+      <summary>
+            The scene to load for the map.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Unit">
+      <summary>
+            Defines a unit. Units are entities that can move.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Unit.OnCreated(Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine when a unit with these properties is created.
+            </summary>
+      <param name="created">The created unit.</param>
+    </member>
+    <member name="M:Fury.Database.Unit.OnDead(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the engine when a unit with these properties dies.
+            </summary>
+      <param name="corpse">The unit that died.</param>
+      <param name="killer">The unit that killed it.</param>
+    </member>
+    <member name="M:Fury.Database.Unit.OnEnable">
+      <summary>
+            If overriden, please call base.OnEnable() at the begining of the overriding function
+            or really terrible things will happen.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.RegisterForTriggers">
+      <summary>
+            If set to true, the unit fires Manager.OnUnitEnterRegion events.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.TurnRate">
+      <summary>
+            The turning rate of the unit, defined in degrees per second.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.MoveRate">
+      <summary>
+            The move rate of the unit, defined in units per second.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.AccelRate">
+      <summary>
+            The acceleration of the unit, defined in units per second per second.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.Health">
+      <summary>
+            The health of the entity.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.Generators">
+      <summary>
+            Defines any energy the entity possesses and regenerates. This is similar to mages having mana in RPG games.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.Abilities">
+      <summary>
+            The abilities this entity possesses.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Unit.Weapon">
+      <summary>
+            The weapon of the entitiy. This value can be null.
+            </summary>
+    </member>
+    <member name="T:Fury.Database.Weapon">
+      <summary>
+            Defines a weapon that hits instantly after the delay period. There is no projectile involved.
+            </summary>
+    </member>
+    <member name="M:Fury.Database.Weapon.OnAttackBegin(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the framework when a unit begins attacking another unit. The default implementation
+            of this method does nothing.
+            </summary>
+      <param name="attacker">The unit that is the attacker.</param>
+      <param name="target">The unit that is the target.</param>
+    </member>
+    <member name="M:Fury.Database.Weapon.OnAttackComplete(Fury.Behaviors.Unit,Fury.Behaviors.Unit)">
+      <summary>
+            Called by the framework when a unit has finished attacking another unit. The default 
+            implementation of this method will damage the target according to the attacker's weapon.
+            </summary>
+      <param name="attacker">The unit that was the attacker.</param>
+      <param name="target">The unit that was the target.</param>
+    </member>
+    <member name="P:Fury.Database.Weapon.Mobile">
+      <summary>
+            Can the weapon be fired when the unit is moving.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Weapon.Range">
+      <summary>
+            The range of the weapon.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Weapon.PreDelay">
+      <summary>
+            The time, in seconds before the weapon is used. If the weapon is not mobile, the 
+            entity will not move during this time.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Weapon.PostDelay">
+      <summary>
+            The time, in seconds before the weapon is put away. If the weapon is not mobile,
+            the entity will not move during this time.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Weapon.Cooldown">
+      <summary>
+            The time before the weapon can fire again. The entity can move during this time.
+            </summary>
+    </member>
+    <member name="P:Fury.Database.Weapon.Damage">
+      <summary>
+            The damage dealt by the weapon.
+            </summary>
+    </member>
+    <member name="T:Fury.Behaviors.Manager">
+      <summary>
+            The manager handles all the core logic of the engine. It is necessary in order for the 
+            engine to run properly. This class follows a singleton patern. Use Manager.Instance to
+            access the current active manager.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Manager.AvailableMaps">
+      <summary>
+            A list of maps that can be dynamically loaded by the manager.
+            </summary>
+    </member>
+    <member name="F:Fury.Behaviors.Manager.AvailableDefinitions">
+      <summary>
+            The list of definitions currently available to be used in play.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.Host(System.Int32,Fury.Database.Map,System.String,System.String,System.Boolean,System.Byte[])">
+      <summary>
+            Host a game.
+            </summary>
+      <param name="port">The port to listen for connections on.</param>
+      <param name="map">The map to host.</param>
+      <param name="gameType">The 'type' of the game. This is a unique identifier used to differentiate applications.</param>
+      <param name="comment">The 'comment' of the game.</param>
+      <param name="register">True if this game should be registered with the master server, false otherwise.</param>
+      <param name="cmdrTag">Data associated with the host commander. This is the commander's tag.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.Join(UnityEngine.HostData,System.Byte[])">
+      <summary>
+            Join a game.
+            </summary>
+      <param name="game">The game to join.</param>
+      <param name="data">Additional data that will be associated with the local commander.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.Join(System.String,System.Int32,System.Byte[])">
+      <summary>
+            Join a game.
+            </summary>
+      <param name="ip">The ip address of the host.</param>
+      <param name="port">The port the host is listening on.</param>
+      <param name="tagData">The tag data for the local commander.</param>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.Disconnect">
+      <summary>
+            Disconnect from any game during any stage.
+            </summary>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.Find``1(System.Int32)">
+      <summary>
+            Find the unit with the specified identifier.
+            </summary>
+      <param name="id">The identifier of the unit.</param>
+      <returns>A unit if one is found, null otherwise.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.CreateAICommander(Fury.CommanderIndices,System.Byte[])">
+      <summary>
+            Create an AI commander.
+            </summary>
+      <param name="idx">The index on which to create the AI commander.</param>
+      <param name="tagData">The tag data of the AI commander.</param>
+      <returns>True if the commander was created, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.StartGame">
+      <summary>
+            Starts the game.
+            </summary>
+      <returns>True if the game could be started, false otherwise.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.CreateDeposit(Fury.Database.Deposit,UnityEngine.Vector3,System.Byte[])">
+      <summary>
+            Create a deposit.
+            </summary>
+      <param name="depType">The type of the deposit.</param>
+      <param name="pos">The position of the deposit.</param>
+      <param name="tag">User-defined data assigned to the deposit.</param>
+      <returns>A deposit stub, that can be used to perform buffered actions before the deposit is created.</returns>
+    </member>
+    <member name="M:Fury.Behaviors.Manager.CreateUnit(Fury.Database.Unit,Fury.Behaviors.Commander,UnityEngine.Vector3,System.Byte[])">
+      <summary>
+            Create a new unit.
+            </summary>
+      <param name="unitType">The type of unit to create.</param>
+      <param name="cmdr">The commander to create the unit for.</param>
+      <param name="pos">The position of the unit.</param>
+      <param name="tag">The data tag of the unit.</param>
+      <returns>A unit stub, which can be used to perform buffered actions before the unit is actually created.</returns>
+    </member>
+    <member name="P:Fury.Behaviors.Manager.Empty">
+      <summary>
+            An empty network message, use this to signify calls originating on the local machine.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Manager.Instance">
+      <summary>
+            The current instance of the manager. 
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Manager.NavMeshAgentType">
+      <summary>
+            The type of the navigation mesh agent to use.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Manager.Commanders">
+      <summary>
+            List of commanders in the current map.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Manager.Deposits">
+      <summary>
+            List of deposits in the current map.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Manager.GameState">
+      <summary>
+            The current state of the game.
+            </summary>
+    </member>
+    <member name="P:Fury.Behaviors.Manager.Map">
+      <summary>
+            The current hosted map.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnMapLoaded">
+      <summary>
+            Called when all the players have loaded into the map.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnMapHosted">
+      <summary>
+            Called when the host has hosted the map.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnCommanderJoined">
+      <summary>
+            Called when a commander has joined the table.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnCommanderLeft">
+      <summary>
+            Called when a commander has left the table.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnUnitCreated">
+      <summary>
+            Called by the engine when a unit is created.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnDepositCreated">
+      <summary>
+            Called by the engine when a deposit is created.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnDepositRemoved">
+      <summary>
+            Called by the framework when a deposit is removed.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnUnitDead">
+      <summary>
+            Called by the engine when a unit dies.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnOrderGiven">
+      <summary>
+            Called by the framework when a commander orders a unit.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnStatusAdded">
+      <summary>
+            Called by the framework when a unit is afflicted with a status. The first unit is the
+            unit that affected unit, the second unit is one that applied the status.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnStatusRemoved">
+      <summary>
+            Called by the framework when a status on a unit is removed.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnEnergyAmountChanged">
+      <summary>
+            Called by the framework when a unit's energy changes.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnUnitEnterTrigger">
+      <summary>
+            Called by the framework when a unit enters a trigger. This event only fires for units that have
+            RegisterForTriggers enabled under properties.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnTokenStackCreated">
+      <summary>
+            Called by the framework when a new token stack is created.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnTokenStackRemoved">
+      <summary>
+            Called by the framework when a token stack is removed.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnTokenStackStateChanged">
+      <summary>
+            Called by the engine when an entity's tokens are changed.
+            </summary>
+    </member>
+    <member name="E:Fury.Behaviors.Manager.OnHealthAmountChanged">
+      <summary>
+            Called by the framework when one unit damages another with an ability. The first unit is
+            the unit that took damage, the second unit is the unit that dealt damage.
+            </summary>
+    </member>
+    <member name="T:Fury.INavMeshAgent">
+      <summary>
+            The INavMeshAgent can be used to implement custom pathfinding solutions if the
+            default Unity solution is not desireable, or not available.
+            </summary>
+    </member>
+    <member name="M:Fury.INavMeshAgent.Stop">
+      <summary>
+            Stop the nav agent from moving.
+            </summary>
+    </member>
+    <member name="M:Fury.INavMeshAgent.Destroy">
+      <summary>
+            Destroy the nav agent.
+            </summary>
+    </member>
+    <member name="M:Fury.INavMeshAgent.SetDestination(UnityEngine.Vector3)">
+      <summary>
+            Set the nav agent destination.
+            </summary>
+      <param name="destination">
+      </param>
+    </member>
+    <member name="P:Fury.INavMeshAgent.velocity">
+      <summary>
+            The velocity of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.radius">
+      <summary>
+            The radius of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.acceleration">
+      <summary>
+            The acceleration of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.angularSpeed">
+      <summary>
+            The maximum angular speed of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.speed">
+      <summary>
+            The maximum translational speed of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.nextPosition">
+      <summary>
+            The position of the unit to be set in the next frame, you should use a bufferd 
+            approach to setting positions, as demonstrated in the tutorials.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.destination">
+      <summary>
+            The destination of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.updatePosition">
+      <summary>
+            If true, the script should set the position of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.updateRotation">
+      <summary>
+            If true, the script should set the rotation of the unit.
+            </summary>
+    </member>
+    <member name="P:Fury.INavMeshAgent.isDestroyed">
+      <summary>
+            If true, the nav agent has been destroyed for some reason.
+            </summary>
+    </member>
+    <member name="T:Fury.Timer">
+      <summary>
+            The timer is a helper class used to execute timed events.
+            </summary>
+    </member>
+    <member name="M:Fury.Timer.Start(System.Single,System.Single,System.Delegate,System.Object[])">
+      <summary>
+            Create a timed event.
+            </summary>
+      <param name="delay">The time before the event is executed.</param>
+      <param name="duration">The time, in seconds, during which the callback will be continuously called. Pass
+            in a value of zero or negative to execute the callback just once.</param>
+      <param name="callback">The callback method that will be executed after the delay.</param>
+      <param name="state">A user-defined state to pass back to the callback function.</param>
+    </member>
+    <member name="M:Fury.Timer.Clear">
+      <summary>
+            Clear all timed events.
+            </summary>
+    </member>
+    <member name="M:Fury.Timer.Remove(Fury.Timer)">
+      <summary>
+            Remove a specific timed event.
+            </summary>
+      <param name="t">The timed event to remove.</param>
+      <returns>True if the event was successfully removed, false otherwise.</returns>
+    </member>
+  </members>
+</doc>

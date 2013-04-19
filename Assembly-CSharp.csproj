@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{C5DD59B0-E7A9-1746-7048-1A4A00554C46}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_1_0;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR;UNITY_TEAM_LICENSE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\AStarPathfindingProject\Core\AstarData.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\AstarMath.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\AstarPath.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\AstarSerialize.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\GraphLoaderHistory\AstarSerializer3_01.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\GraphLoaderHistory\AstarSerializer3_04.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\GraphLoaderHistory\AstarSerializer3_05.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\GraphLoaderHistory\AstarSerializer3_07.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\Seeker.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Core\astarclasses.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\Base.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\GridGenerator.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\ListGenerator.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\NavMeshGenerator.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\Utilities\BBTree.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\Utilities\Huffman.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\Utilities\NavMeshRenderer.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Generators\Utilities\ObjImporter.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Modifiers\AlternativePath.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Modifiers\FunnelModifier.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Modifiers\Modifiers.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Modifiers\RaycastModifier.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Modifiers\SimpleSmoothModifier.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Modifiers\StartEndModifier.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Pathfinders\CleanupPath65K.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Pathfinders\ConstantPath.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Pathfinders\Path.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Pathfinders\XPath.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Utilities\AstarProfiler.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Utilities\Parallel.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Utilities\SizeProfiler.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
+     <Compile Include="Assets\AStarPathfindingProject\changelog.cs" />
+     <Compile Include="Assets\Fury\ExternalPathfinding\AStarNavAgent.cs" />
+     <Compile Include="Assets\Fury\ExternalPathfinding\NavMeshAgentSettings.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Content\Interface\SimpleHUD.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Abilities\AreaStrike.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Abilities\InstantStrike.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Abilities\LootCrate.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Items\Consumables\Consumable.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Items\Consumables\EnergyPot.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Items\Consumables\HealthPot.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Items\Equipment\Equipment.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Projectile.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Statuses\DamageOverTime.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Statuses\StunEffect.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Units\DummyLogic.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Units\Tower.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Weapons\MageWeapon.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Weapons\RangedWeapon.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Definitions\Weapons\WarriorWeapon.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\AttackNearest.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\BoidAgent.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\CreepSpawner.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\InventoryManager.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\Lobby.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\Triggers\GameStart.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\Triggers\Tutorial.cs" />
+     <Compile Include="Assets\Fury\Tutorial\Scripts\Water.cs" />
+     <Compile Include="Assets\Scripts\Triggers\GameStartPoc.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\DamageOverTimePoc.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\GUIPoc.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\InstantStrikePoc.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\InventoryManagerPoc.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\ItemPoc.cs" />
+     <None Include="Assets\AStarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
+     <None Include="Assets\Fury\Readme.txt" />
+     <None Include="Assets\Fury\Framework\Fury.xml" />
+     <None Include="Assets\Fury\Tutorial\Content\Interface\Materials\TransparentUnlit.shader" />
+     <None Include="Assets\AStarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.shader" />
+     <None Include="Assets\AStarPathfindingProject\readme.txt" />
+ <Reference Include="Fury">
+ <HintPath>Assets\Fury\Framework\Fury.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
