@@ -34,7 +34,7 @@ public class GameStartPoc : MonoBehaviour
 
 	public GameObject Player;
 
-	public ItemPoc[] StartingItems;
+	//public ItemPoc[] StartingItems;
 
 	/// <summary>
 	/// Called by the Unity engine when the behaviour starts up.
