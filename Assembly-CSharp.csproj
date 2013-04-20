@@ -109,6 +109,7 @@
      <Compile Include="Assets\SpaceIndustry\Scripts\InstantStrikePoc.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\InventoryManagerPoc.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\ItemPoc.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\PlayerStorage.cs" />
      <None Include="Assets\AStarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\Fury\Readme.txt" />
      <None Include="Assets\Fury\Framework\Fury.xml" />

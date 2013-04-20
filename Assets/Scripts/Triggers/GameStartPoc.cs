@@ -65,15 +65,15 @@ public class GameStartPoc : MonoBehaviour
 		// TODO: Most triggers will need to verify some condition of the event
 		if (true)
 		{
-			var unit = this.Player.GetComponent<Fury.Behaviors.Unit>();
+			//var unit = this.Player.GetComponent<Fury.Behaviors.Unit>();
 
-			foreach (var item in StartingItems)
-			{
-				//if (item is ItemPoc)
-				//{
-					unit.CreateTokenStack(item, new byte[] { 0 });
-				//}
-			}
+			//foreach (var item in StartingItems)
+			//{
+			//    //if (item is ItemPoc)
+			//    //{
+			//        unit.CreateTokenStack(item, new byte[] { 0 });
+			//    //}
+			//}
 
 			// Most triggers will just destroy themselves after executing
 			GameObject.Destroy(this);

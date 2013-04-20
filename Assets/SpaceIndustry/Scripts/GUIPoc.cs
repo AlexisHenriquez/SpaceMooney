@@ -1,28 +1,37 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class GUIPoc : MonoBehaviour {
 
 	public GameObject Buildable;
 
+	public PlayerStorage Storage;
+
 	public void OnGUI()
 	{
-		GUI.Button(new Rect(10, 10, 50, 25), "(P)anel Solar");
+		int cantidadPaneles = 0;
 
-		//if (GUI.Button(new Rect(10, 10, 100, 50), "Panel Solar"))
-		//{
-		//    Debug.Log("Button clicked!");
-		//}
+		if (this.Storage != null)
+		{
+			cantidadPaneles = this.Storage.CantidadPanelesSolares;
+		}
+
+		GUI.Button(new Rect(10, 10, 200, 30), String.Format("(P)aneles Solares: {0}", cantidadPaneles.ToString()));
 	}
 
-	//void Update()
-	//{
-	//    GameObject clone;
+	void Update()
+	{
+		this.ComprarPanelSolar();
+	}
 
-	//    if (Input.GetKeyDown(KeyCode.P))
-	//    {
-	//        clone = Instantiate(this.Buildable, 
-	//    }
-	//}
+	public void ComprarPanelSolar()
+	{
+		if (this.Storage != null &&
+			Input.GetKeyDown(KeyCode.P))
+		{
+			this.Storage.AumentarUnidadPanelSolar();
+		}
+	}
 	
 }
