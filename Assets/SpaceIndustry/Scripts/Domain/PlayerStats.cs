@@ -12,11 +12,19 @@ public class PlayerStats : MonoBehaviour
 
 	public IDictionary<Buyables, int> Inventory;
 
+	public IList<SolarPanel> SolarPanels;
+
+	public Player Player;
+
 	void Start()
 	{
 		this.BuyingInventory = new Dictionary<Buyables, int>(BuyablesArray.Length);
 
 		this.Inventory = new Dictionary<Buyables, int>(BuyablesArray.Length);
+
+		this.SolarPanels = new List<SolarPanel>();
+
+		this.Player = new Player() { Budget = 100 };
 
 		foreach (var item in BuyablesArray)
 		{
@@ -26,14 +34,21 @@ public class PlayerStats : MonoBehaviour
 		}
 	}
 	
-	public int Buy(Buyables objectToBuy, int cantidad)
+	public bool Buy(Buyables objectToBuy, int cantidad)
 	{
-		if (GetBuyingAmountOf(objectToBuy) < 0)
-			this.BuyingInventory[objectToBuy] = 0;
-		else
+		bool canBuy = this.Player.HasBudgetToBuy(objectToBuy, cantidad);
+
+		if (canBuy)
+		{
 			this.BuyingInventory[objectToBuy] += cantidad;
 
-		return GetBuyingAmountOf(objectToBuy);
+			this.Player.DiscountTotalPrice(objectToBuy, cantidad);
+		}
+
+		//if (GetBuyingAmountOf(objectToBuy) < 0)
+		//    this.BuyingInventory[objectToBuy] = 0;
+
+		return canBuy;
 	}
 
 	public int GetBuyingAmountOf(Buyables objectToBuy)
@@ -65,6 +80,11 @@ public class PlayerStats : MonoBehaviour
 		{
 			this.Inventory[objectToUpdate] = 0;
 		}
+	}
+
+	public void AddSolarPanel()
+	{
+		this.SolarPanels.Add(new SolarPanel());
 	}
 
 }

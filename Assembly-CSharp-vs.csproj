@@ -105,8 +105,14 @@
      <Compile Include="Assets\Fury\Tutorial\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\Triggers\GameStartPoc.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\BuildSolarPanel.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Buildable.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Buyable.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Buyables.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Parts.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Player.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\PlayerStats.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\SolarPanel.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Exceptions\InsuficientBudgetException.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\PlayerHUD.cs" />
      <None Include="Assets\AStarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\Fury\Readme.txt" />

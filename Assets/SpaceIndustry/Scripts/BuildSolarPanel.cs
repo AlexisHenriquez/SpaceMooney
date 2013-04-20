@@ -20,7 +20,9 @@ public class BuildSolarPanel : Fury.Database.Ability
 		if (playerStats != null &&
 			playerStats.HasInInventory(Buyables.SolarPanel))
 		{
-			GameObject clone = Instantiate(this.SolarPanel, new Vector3(position.x + 0.0F, position.y + 2.0F, position.z + 0.0F), caster.transform.rotation) as GameObject;
+			GameObject clone = Instantiate(this.SolarPanel, new Vector3(position.x + 0.0F, position.y, position.z + 0.0F), caster.transform.rotation) as GameObject;
+
+			playerStats.AddSolarPanel();
 
 			if (this.Effect != null)
 			{

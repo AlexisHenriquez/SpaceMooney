@@ -25,11 +25,15 @@ public class PlayerHUD : MonoBehaviour
 
 		GUI.Button(new Rect(95, 10, 80, 30), "(I)nventario");
 
+		GUI.Button(new Rect(250, 10, 120, 30), "Estadísticas");
+
 		this.HandleBuy();
 
 		this.HandleInventory();
 
 		this.HandleShipping();
+
+		this.HandleResources();
 	}
 
 	public void HandleInventory()
@@ -66,6 +70,15 @@ public class PlayerHUD : MonoBehaviour
 		}
 
 		this.HandleBuyConfirm();
+	}
+
+	public void HandleResources()
+	{
+		GUI.Button(new Rect(250, 50, 150, 100), string.Empty);
+
+		GUI.Button(new Rect(255, 60, 140, 30), string.Format("Presupuesto: {0}", this.PlayerStats.Player.Budget));
+
+		GUI.Button(new Rect(255, 95, 140, 30), string.Format("Energía: {0}", 0));
 	}
 
 	public void HandleBuyConfirm()
