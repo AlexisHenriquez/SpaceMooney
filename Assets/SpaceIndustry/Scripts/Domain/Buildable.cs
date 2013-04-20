@@ -11,4 +11,9 @@ public class Buildable
 
 	public Parts Parts { get; set; }
 
+	public virtual int GetConsumeEnergyFactor()
+	{
+		return 0;
+	}
+
 }

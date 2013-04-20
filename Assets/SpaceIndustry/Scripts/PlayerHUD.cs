@@ -17,7 +17,22 @@ public class PlayerHUD : MonoBehaviour
 
 	internal const float ShippingArrivalTime = 5F;
 
+	internal const float EnergyLoadInterval = 10F;
+
+	internal float EnergyLoadTime;
+
+	internal const float EnergyConsumeInterval = 10F;
+
+	internal float EnergyConsumeTime;
+
 	internal float ArrivalTime;
+
+	void Start()
+	{
+		EnergyLoadTime = EnergyLoadInterval;
+
+		EnergyConsumeTime = EnergyConsumeInterval;
+	}
 
 	public void OnGUI()
 	{
@@ -74,11 +89,39 @@ public class PlayerHUD : MonoBehaviour
 
 	public void HandleResources()
 	{
+		this.HandleLoadEnergy();
+
+		this.HandleConsumeEnergy();
+
 		GUI.Button(new Rect(250, 50, 150, 100), string.Empty);
 
 		GUI.Button(new Rect(255, 60, 140, 30), string.Format("Presupuesto: {0}", this.PlayerStats.Player.Budget));
 
-		GUI.Button(new Rect(255, 95, 140, 30), string.Format("Energía: {0}", 0));
+		GUI.Button(new Rect(255, 95, 140, 30), string.Format("Energía: {0}", this.PlayerStats.TotalEnergy));
+	}
+
+	public void HandleConsumeEnergy()
+	{
+		EnergyConsumeTime -= Time.deltaTime;
+
+		if (EnergyConsumeTime <= 0)
+		{
+			this.PlayerStats.ConsumeEnergy();
+
+			EnergyConsumeTime = EnergyConsumeInterval;
+		}
+	}
+
+	public void HandleLoadEnergy()
+	{
+		EnergyLoadTime -= Time.deltaTime;
+
+		if (EnergyLoadTime <= 0)
+		{
+			this.PlayerStats.LoadEnergy();
+
+			EnergyLoadTime = EnergyLoadInterval;
+		}
 	}
 
 	public void HandleBuyConfirm()

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -14,7 +15,13 @@ public class PlayerStats : MonoBehaviour
 
 	public IList<SolarPanel> SolarPanels;
 
+	public IList<Buildable> EnergyConsumers;
+
+	public Robonauta Robonauta;
+
 	public Player Player;
+
+	public int TotalEnergy = 100;
 
 	void Start()
 	{
@@ -23,6 +30,10 @@ public class PlayerStats : MonoBehaviour
 		this.Inventory = new Dictionary<Buyables, int>(BuyablesArray.Length);
 
 		this.SolarPanels = new List<SolarPanel>();
+
+		this.Robonauta = new Robonauta();
+
+		this.EnergyConsumers = new List<Buildable>() { this.Robonauta };
 
 		this.Player = new Player() { Budget = 100 };
 
@@ -33,7 +44,7 @@ public class PlayerStats : MonoBehaviour
 			this.Inventory.Add((Buyables)item, 0);
 		}
 	}
-	
+
 	public bool Buy(Buyables objectToBuy, int cantidad)
 	{
 		bool canBuy = this.Player.HasBudgetToBuy(objectToBuy, cantidad);
@@ -85,6 +96,19 @@ public class PlayerStats : MonoBehaviour
 	public void AddSolarPanel()
 	{
 		this.SolarPanels.Add(new SolarPanel());
+	}
+
+	public void LoadEnergy()
+	{
+		if (this.SolarPanels.Any())
+		{
+			this.TotalEnergy += this.SolarPanels.Sum(c => c.Energy);
+		}
+	}
+
+	public void ConsumeEnergy()
+	{
+		this.TotalEnergy -= this.Robonauta.GetConsumeEnergyFactor();
 	}
 
 }

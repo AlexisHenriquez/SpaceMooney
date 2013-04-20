@@ -111,6 +111,7 @@
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Parts.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Player.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\PlayerStats.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Robonauta.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\SolarPanel.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Exceptions\InsuficientBudgetException.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\PlayerHUD.cs" />
