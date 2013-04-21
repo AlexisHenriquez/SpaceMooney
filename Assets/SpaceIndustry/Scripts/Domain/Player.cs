@@ -39,7 +39,27 @@ public class Player
 			totalPrice = GetTotalPriceMicrowaveAntenna(cantidad);
 		}
 
+		if (objectToBuy == Buyables.SolarPanelFactory)
+		{
+			totalPrice = GetTotalPriceSolarPanelFactorry(cantidad);
+		}
+
+		if (objectToBuy == Buyables.MineralExtractor)
+		{
+			totalPrice = GetTotalPriceMineralExtractor(cantidad);
+		}
+
 		return totalPrice <= this.Budget;
+	}
+
+	private int GetTotalPriceMineralExtractor(int cantidad)
+	{
+		return cantidad * MineralExtractor.PRICE_MINERAL_EXTRACTOR;
+	}
+
+	private int GetTotalPriceSolarPanelFactorry(int cantidad)
+	{
+		return cantidad * SolarPanelFactory.PRICE_SOLAR_PANEL;
 	}
 
 	public void DiscountTotalPrice(Buyables objectToBuy, int cantidad)
@@ -59,6 +79,15 @@ public class Player
 		if (objectToBuy == Buyables.MicrowaveAntenna)
 		{
 			totalPrice = GetTotalPriceMicrowaveAntenna(cantidad);
+		}
+
+		if (objectToBuy == Buyables.SolarPanelFactory)
+		{
+			totalPrice = GetTotalPriceSolarPanelFactorry(cantidad);
+		}
+		if (objectToBuy == Buyables.MineralExtractor)
+		{
+			totalPrice = GetTotalPriceMineralExtractor(cantidad);
 		}
 
 		this.Budget -= totalPrice;
@@ -94,4 +123,10 @@ public class Player
 		}
 	}
 
+
+	public bool HasPrerequisites(Buyables objectToBuy, int cantidad)
+	{
+		//TODO: Implement!
+		return true;
+	}
 }

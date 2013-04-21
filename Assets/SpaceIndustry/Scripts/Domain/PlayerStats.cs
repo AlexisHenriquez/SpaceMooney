@@ -23,6 +23,10 @@ public class PlayerStats : MonoBehaviour
 
 	public IList<MicrowaveAntenna> MicrowaveAntennas;
 
+    public IList<MineralExtractor> MineralExtractors;
+
+	public IList<SolarPanelFactory> SolarPanelsFactory;
+
 	public Robonauta Robonauta;
 
 	public Player Player;
@@ -30,6 +34,12 @@ public class PlayerStats : MonoBehaviour
 	public int TotalEnergy = 100;
 
 	public int TotalOxygen = 0;
+
+	public int TotalAlluminum = 0;
+
+	public int TotalSilicon = 0;
+
+	public int TotalIron = 0;
 
 	void Start()
 	{
@@ -45,6 +55,10 @@ public class PlayerStats : MonoBehaviour
 
 		this.MicrowaveAntennas = new List<MicrowaveAntenna>();
 
+        this.MineralExtractors = new List<MineralExtractor>();
+
+		this.SolarPanelsFactory = new List<SolarPanelFactory>();
+		
 		this.Robonauta = new Robonauta();
 
 		this.EnergyConsumers = new List<Buildable>() { this.Robonauta };
@@ -69,8 +83,9 @@ public class PlayerStats : MonoBehaviour
 			}
 		}
 		bool canBuy = this.Player.HasBudgetToBuy(objectToBuy, cantidad);
+		bool hasPrerequisites = this.Player.HasPrerequisites(objectToBuy, cantidad);
 
-		if (canBuy)
+		if (canBuy && hasPrerequisites)
 		{
 			this.BuyingInventory[objectToBuy] += cantidad;
 
@@ -140,11 +155,20 @@ public class PlayerStats : MonoBehaviour
 		{
 			this.TotalOxygen += this.OxygenExtractors.Sum(c => c.Oxygen);
 		}
+
+        if (this.MineralExtractors.Any())
+        {
+			this.TotalAlluminum += this.MineralExtractors.Sum(c => c.Mineral);
+			this.TotalSilicon += this.MineralExtractors.Sum(c => c.Mineral);
+			this.TotalIron += this.MineralExtractors.Sum(c => c.Mineral);
+        }
 	}
 
 	public void ConsumeEnergy()
 	{
 		this.TotalEnergy -= this.EnergyConsumers.Sum(c => c.GetConsumeEnergyFactor());
+
+		this.TotalEnergy = this.TotalEnergy < 0 ? 0 : this.TotalEnergy;
 	}
 
 	public void DegradateObjects()
@@ -192,6 +216,21 @@ public class PlayerStats : MonoBehaviour
 		}
 	}
 
+	public void ConsumeMinerals() 
+	{
+		if (this.SolarPanelsFactory.Any())
+		{
+			this.TotalSilicon -= this.SolarPanelsFactory.Sum(c => c.ConsumeSiliconFactor());
+			this.TotalAlluminum -= this.SolarPanelsFactory.Sum(c => c.ConsumeAlluminumFactor());
+			this.TotalIron -= this.SolarPanelsFactory.Sum(c => c.ConsumeIronFactor());
+			this.Inventory[Buyables.SolarPanel] += 1;
+
+			this.TotalSilicon = this.TotalSilicon < 0 ? 0 : this.TotalSilicon;
+			this.TotalAlluminum = this.TotalAlluminum < 0 ? 0 : this.TotalAlluminum;
+			this.TotalIron = this.TotalIron < 0 ? 0 : this.TotalIron;
+		}
+	}
+
 	public Buildable AddMicrowaveAntenna(GameObject clone)
 	{
 		MicrowaveAntenna newMicrowaveAntenna = new MicrowaveAntenna(clone);
@@ -204,6 +243,17 @@ public class PlayerStats : MonoBehaviour
 		return newMicrowaveAntenna;
 	}
 
+	public Buildable AddSolarPanelFactory(GameObject clone)
+	{
+		SolarPanelFactory newSolarPanelFactory = new SolarPanelFactory(clone);
+
+		this.SolarPanelsFactory.Add(newSolarPanelFactory);
+		newSolarPanelFactory.Id = this.SolarPanelsFactory.Count - 1;
+
+		this.EnergyConsumers.Add(newSolarPanelFactory);
+
+		return newSolarPanelFactory;
+	}
 
 	internal void removeGameObject(Buildable buildable)
 	{
@@ -223,6 +273,21 @@ public class PlayerStats : MonoBehaviour
 			var objectToRemove = this.MicrowaveAntennas.SingleOrDefault(c => c.Id == buildable.Id);
 			this.MicrowaveAntennas.Remove(objectToRemove);
 		}
+		if (buildable is MineralExtractor)
+		{
+			var objectToRemove = this.MineralExtractors.SingleOrDefault(c => c.Id == buildable.Id);
+			this.MineralExtractors.Remove(objectToRemove);
+		}
+		if (buildable is OxygenRefinery)
+		{
+			var objectToRemove = this.OxygenRefineries.SingleOrDefault(c => c.Id == buildable.Id);
+			this.OxygenRefineries.Remove(objectToRemove);
+		}
+		if (buildable is SolarPanelFactory)
+		{
+			var objectToRemove = this.SolarPanelsFactory.SingleOrDefault(c => c.Id == buildable.Id);
+			this.SolarPanelsFactory.Remove(objectToRemove);
+		}
 		var buildableToRemove = this.EnergyConsumers.SingleOrDefault(c => c.Id == buildable.Id && c is MicrowaveAntenna);
 		if (buildableToRemove != null)
 		{
@@ -235,6 +300,18 @@ public class PlayerStats : MonoBehaviour
 		}
 
 	}
+	
+    public Buildable AddMineralExtractor(GameObject clone)
+    {
+        MineralExtractor newMineralExtractor = new MineralExtractor(clone);
+
+        this.MineralExtractors.Add(newMineralExtractor);
+        newMineralExtractor.Id = this.MineralExtractors.Count - 1;
+
+        this.EnergyConsumers.Add(newMineralExtractor);
+
+        return newMineralExtractor;
+    }
 
 	internal Buildable AddOxygenRefinery(GameObject clone)
 	{
@@ -246,4 +323,5 @@ public class PlayerStats : MonoBehaviour
 		newOxygenRefinery.Id = this.OxygenRefineries.Count - 1;
 		return newOxygenRefinery;
 	}
+
 }

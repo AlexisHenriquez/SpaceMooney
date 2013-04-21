@@ -9,6 +9,8 @@ public enum Buyables
 	SolarPanel,
 	MicrowaveAntenna,
 	OxygenExtractor,
-	OxygenRefinery
+	OxygenRefinery,
+	MineralExtractor,
+	SolarPanelFactory
 
 }

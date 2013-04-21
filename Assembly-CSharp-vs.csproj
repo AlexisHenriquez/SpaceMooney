@@ -105,14 +105,17 @@
      <Compile Include="Assets\Fury\Tutorial\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\Triggers\GameStartPoc.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\BuildMicrowaveAntenna.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\BuildMineralExtractor.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\BuildOxygenExtractor.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\BuildOxygenRefinery.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\BuildSolarPanel.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\BuildSolarPanelFactory.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\CollisionManager.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Buildable.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Buyable.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Buyables.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\MicrowaveAntenna.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\MineralExtractor.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\OxygenExtractor.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\OxygenRefinery.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Parts.cs" />
@@ -120,6 +123,7 @@
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\PlayerStats.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\Robonauta.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Domain\SolarPanel.cs" />
+     <Compile Include="Assets\SpaceIndustry\Scripts\Domain\SolarPanelFactory.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\Exceptions\InsuficientBudgetException.cs" />
      <Compile Include="Assets\SpaceIndustry\Scripts\PlayerHUD.cs" />
      <None Include="Assets\AStarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
