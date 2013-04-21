@@ -167,7 +167,10 @@ public class PlayerStats : MonoBehaviour
 	{
 		if (this.MicrowaveAntennas.Any())
 		{
+			// How much money that energy generates
 			this.Player.Budget += this.MicrowaveAntennas.Sum(c => c.GetIncome());
+			// Decrease the amount of energy just sold
+			this.TotalEnergy -= this.MicrowaveAntennas.Sum(c => c.GetSellEnergyFactor());
 		}
 	}
 
