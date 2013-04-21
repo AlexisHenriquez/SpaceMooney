@@ -23,7 +23,7 @@ public class BuildOxygenExtractor : Fury.Database.Ability
         if (playerStats != null &&
             playerStats.HasInInventory(Buyables.OxygenExtractor))
         {
-            GameObject clone = Instantiate(this.OxygenExtractor, new Vector3(position.x + 0.0F, position.y + 5F, position.z + 0.0F), new Quaternion(-90, -360, -360, 0)) as GameObject;
+            GameObject clone = Instantiate(this.OxygenExtractor, new Vector3(position.x + 0.0F, position.y + 1F, position.z + 0.0F), new Quaternion(0, 0, 0, 0)) as GameObject;
 
 			var oxygen = playerStats.AddOxygenExtractor(clone);
 			var collisionManager = clone.GetComponent<CollisionManager>();
