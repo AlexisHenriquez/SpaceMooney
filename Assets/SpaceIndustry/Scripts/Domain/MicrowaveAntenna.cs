@@ -31,14 +31,14 @@ public class MicrowaveAntenna : Buildable
 		return 5;
 	}
 
-	public int GetSellEnergyFactor()
+	public int GetSellFactor()
 	{
-		return 10;
+		return SELL_FACTOR;
 	}
 
 	public int GetIncome()
 	{
-		return 2 * this.GetSellEnergyFactor();
+		return 2 * this.GetSellFactor();
 	}
 
 }

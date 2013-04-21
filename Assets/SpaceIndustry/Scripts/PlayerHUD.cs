@@ -32,7 +32,7 @@ public class PlayerHUD : MonoBehaviour
 	{
 		GUI.Button(new Rect(10, 10, 80, 30), "(C)omprar");
 
-		GUI.Button(new Rect(145, 10, 80, 30), "(I)nventario");
+		GUI.Button(new Rect(155, 10, 80, 30), "(I)nventario");
 
 		GUI.Button(new Rect(350, 10, 120, 30), "Estadísticas");
 
@@ -49,13 +49,14 @@ public class PlayerHUD : MonoBehaviour
 	{
 		if (ShowInventory)
 		{
-			GUI.Button(new Rect(145, 50, 160, 120), string.Empty);
+			GUI.Button(new Rect(155, 50, 180, 170), string.Empty);
 
-			GUI.Button(new Rect(150, 60, 110, 30), string.Format("Panel Solar: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.SolarPanel).ToString()));
+			GUI.Button(new Rect(160, 60, 110, 30), string.Format("Panel Solar: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.SolarPanel).ToString()));
 
-			GUI.Button(new Rect(150, 95, 110, 30), string.Format("Antena: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.MicrowaveAntenna).ToString()));
+			GUI.Button(new Rect(180, 95, 110, 30), string.Format("Antena: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.MicrowaveAntenna).ToString()));
 
-            GUI.Button(new Rect(150, 130, 150, 30), string.Format("Extrac. de oxigeno: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.OxygenExtractor).ToString()));
+			GUI.Button(new Rect(160, 130, 150, 30), string.Format("Extrac. o2: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.OxygenExtractor).ToString()));
+			GUI.Button(new Rect(180, 165, 150, 30), string.Format("Refinería de o2: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.OxygenRefinery).ToString()));
 		}
 	}
 
@@ -134,13 +135,14 @@ public class PlayerHUD : MonoBehaviour
 		if (ShowBuyMenu &&
 			!ShippingInProgress)
 		{
-			GUI.Button(new Rect(10, 50, 120, 150), string.Empty);
+			GUI.Button(new Rect(10, 50, 140, 170), string.Empty);
 
 			GUI.Button(new Rect(15, 60, 110, 30), string.Format("(P)anel Solar: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.SolarPanel).ToString()));
 
-			GUI.Button(new Rect(15, 95, 110, 30), string.Format("A(n)tena: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.MicrowaveAntenna).ToString()));
-			
+			GUI.Button(new Rect(35, 95, 110, 30), string.Format("A(n)tena: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.MicrowaveAntenna).ToString()));
+
 			GUI.Button(new Rect(15, 130, 110, 30), string.Format("(E)xtrac. O2: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.OxygenExtractor).ToString()));
+			GUI.Button(new Rect(35, 165, 110, 30), string.Format("(R)efin. O2: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.OxygenRefinery).ToString()));
 		}
 	}
 

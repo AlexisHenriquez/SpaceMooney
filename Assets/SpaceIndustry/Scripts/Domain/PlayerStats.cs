@@ -19,6 +19,8 @@ public class PlayerStats : MonoBehaviour
 
 	public IList<OxygenExtractor> OxygenExtractors;
 
+	public IList<OxygenRefinery> OxygenRefineries;
+
 	public IList<MicrowaveAntenna> MicrowaveAntennas;
 
 	public Robonauta Robonauta;
@@ -38,6 +40,8 @@ public class PlayerStats : MonoBehaviour
 		this.SolarPanels = new List<SolarPanel>();
 
 		this.OxygenExtractors = new List<OxygenExtractor>();
+
+		this.OxygenRefineries = new List<OxygenRefinery>();
 
 		this.MicrowaveAntennas = new List<MicrowaveAntenna>();
 
@@ -170,7 +174,13 @@ public class PlayerStats : MonoBehaviour
 			// How much money that energy generates
 			this.Player.Budget += this.MicrowaveAntennas.Sum(c => c.GetIncome());
 			// Decrease the amount of energy just sold
-			this.TotalEnergy -= this.MicrowaveAntennas.Sum(c => c.GetSellEnergyFactor());
+			this.TotalEnergy -= this.MicrowaveAntennas.Sum(c => c.GetSellFactor());
+		}
+
+		if (this.OxygenRefineries.Any())
+		{
+			this.Player.Budget += this.OxygenRefineries.Sum(c => c.getIncome());
+			this.TotalOxygen -= this.OxygenRefineries.Sum(c => c.GetSellFactor());
 		}
 	}
 
@@ -224,5 +234,16 @@ public class PlayerStats : MonoBehaviour
 			this.EnergyConsumers.Remove(buildableToRemove);
 		}
 
+	}
+
+	internal Buildable AddOxygenRefinery(GameObject clone)
+	{
+		OxygenRefinery newOxygenRefinery = new OxygenRefinery(clone);
+
+		this.OxygenRefineries.Add(newOxygenRefinery);
+
+		this.EnergyConsumers.Add(newOxygenRefinery);
+		newOxygenRefinery.Id = this.OxygenRefineries.Count - 1;
+		return newOxygenRefinery;
 	}
 }
