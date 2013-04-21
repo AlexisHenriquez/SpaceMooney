@@ -132,6 +132,7 @@
      <None Include="Assets\Fury\Tutorial\Content\Interface\Materials\TransparentUnlit.shader" />
      <None Include="Assets\AStarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.shader" />
      <None Include="Assets\AStarPathfindingProject\readme.txt" />
+     <None Include="Assets\SpaceIndustry\Models\gymnastics\textures.txt" />
      <None Include="Assets\SpaceIndustry\Models\PanelSolar\textures.txt" />
  <Reference Include="Fury">
  <HintPath>Assets\Fury\Framework\Fury.dll</HintPath>

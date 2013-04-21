@@ -24,7 +24,7 @@ using UnityEngine;
 		if (playerStats != null &&
 			playerStats.HasInInventory(Buyables.SolarPanelFactory))
 		{
-			GameObject clone = Instantiate(this.solarPanelFactory, new Vector3(position.x + 0.0F, position.y + 5F, position.z + 0.0F), new Quaternion(0, 0, 0, 0)) as GameObject;
+			GameObject clone = Instantiate(this.solarPanelFactory, new Vector3(position.x + 0.0F, position.y + 5F, position.z + 0.0F), new Quaternion(-45, 0, 0, 0)) as GameObject;
 
 			var solarPanelFactory = playerStats.AddSolarPanelFactory(clone);
 			var collisionManager = clone.GetComponent<CollisionManager>();

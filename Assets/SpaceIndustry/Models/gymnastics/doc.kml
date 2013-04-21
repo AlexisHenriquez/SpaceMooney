@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://earth.google.com/kml/2.1'>
+<Folder>
+    <name>model</name>
+    <description><![CDATA[Created with <a href="http://sketchup.google.com/">Google SketchUp 7.0.1</a>]]></description>
+    <DocumentSource>SketchUp</DocumentSource>
+<visibility>1</visibility>
+<LookAt>
+<heading>315.868</heading>
+<tilt>65.6381</tilt>
+<latitude>40.00194557518236</latitude>
+<longitude>-105.1070844640357</longitude>
+<range>252.4116685285315</range>
+<altitude>94.8279166365085</altitude>
+</LookAt>
+<Folder>
+<name>Tour</name>
+<Placemark>
+<name><![CDATA[Camera]]></name>
+<visibility>1</visibility>
+<LookAt>
+<heading>315.868</heading>
+<tilt>65.6381</tilt>
+<latitude>40.00194557518236</latitude>
+<longitude>-105.1070844640357</longitude>
+<range>252.4116685285315</range>
+<altitude>94.8279166365085</altitude>
+</LookAt>
+</Placemark>
+</Folder>
+  <Placemark>
+    <name>Model</name>
+    <description><![CDATA[]]></description>
+    <Style id='default'>
+    </Style>
+    <Model>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <Location>
+            <longitude>-105.106993454017</longitude>
+            <latitude>40.002092548565</latitude>
+            <altitude>0.000000000000</altitude>
+        </Location>
+        <Orientation>
+            <heading>359.931210973102</heading>
+            <tilt>0</tilt>
+            <roll>0</roll>
+        </Orientation>
+        <Scale>
+            <x>1.0</x>
+            <y>1.0</y>
+            <z>1.0</z>
+        </Scale>
+        <Link>
+            <href>models/model.dae</href>
+        </Link>
+    </Model>
+  </Placemark></Folder>
+</kml>
