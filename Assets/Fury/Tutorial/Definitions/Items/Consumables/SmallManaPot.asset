@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed1762465e8f184a95a83ff08bb4e6b, type: 1}
+  m_Name: SmallManaPot
+  Icon: {fileID: 2800000, guid: 399ef529cb1bf874ba33e251d8482653, type: 1}
+  EnergyType: {fileID: 11400000, guid: 00fa9a53d70eb7c42b1214c486b6591b, type: 2}
+  ReplenishAmount: 50

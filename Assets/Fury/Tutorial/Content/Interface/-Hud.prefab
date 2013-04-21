@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 3
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: -Hud
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27.8596344, y: 69.6617432, z: -10.8069019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085a84805077d4f4991abd1e2e2d7431, type: 1}
+  m_Name: 
+  CameraConstraint:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 64, y: 64, z: 64}
+  CursorFriendly: {fileID: 2800000, guid: 6e046094f78c73f4bb3b1ef82b8362ba, type: 1}
+  CursorHostile: {fileID: 2800000, guid: 4a338dafeab9ccf4b9b22ac283403177, type: 1}
+  CursorNeutral: {fileID: 2800000, guid: d4f963f864825c44e8bff756ce5d515a, type: 1}
+  TargetFriendly: {fileID: 2800000, guid: 6efc834e46a22294cab7762e5e8f5f3a, type: 1}
+  TargetHostile: {fileID: 2800000, guid: 8f3d478c808a8e149b4a7555d9c9be81, type: 1}
+  TargetNeutral: {fileID: 2800000, guid: c345b9bf82181124e9d52ca94ac8e80f, type: 1}
+  IconFrame: {fileID: 2800000, guid: 12d6cda7a6583024a9dc2468017b7ab9, type: 1}
+  Numbers:
+  - {fileID: 2800000, guid: 7d3dcf4c369cb3e4caabff1011029532, type: 1}
+  - {fileID: 2800000, guid: e2d5b2d4dc244db429a8312c2ecf6666, type: 1}
+  - {fileID: 2800000, guid: 11a276715280fb34ebbbb8bdb6704f3a, type: 1}
+  - {fileID: 2800000, guid: b3add3eaef22bbc418bc3f00ebfe8707, type: 1}
+  - {fileID: 2800000, guid: 01808ec7891216145994d776b2feac43, type: 1}
+  - {fileID: 2800000, guid: ac4340c77694cc643ad66c37af310da4, type: 1}
+  - {fileID: 2800000, guid: 02a792a4f35fc994890af1dc2bb260cd, type: 1}
+  - {fileID: 2800000, guid: c79396a62ffd623459bfeadce61590ad, type: 1}
+  - {fileID: 2800000, guid: 8922c51237b53d8418433c02d9d6223f, type: 1}
+  - {fileID: 2800000, guid: 039f54e1640906c468791cddc33fe84c, type: 1}
+  FollowObject: {fileID: 0}
+  MaterialSelect: {fileID: 2100000, guid: ebba63aae33c5404c91295eae1bddf78, type: 2}
+  MaterialHover: {fileID: 2100000, guid: aa9626218a0d35642997dc0a0e986164, type: 2}
+  MaxDistanceFromGround: 20
+  MinDistanceFromGround: 10
+  DesiredDistanceFromGround: 15
+  UnitMask:
+    serializedVersion: 2
+    m_Bits: 256
+  IgnoreMask:
+    serializedVersion: 2
+    m_Bits: 0
+  TargetPrefab: {fileID: 100000, guid: 99f88699ad7640f4d9d1695028ba69f9, type: 2}
+  RingPrefab: {fileID: 100000, guid: 4062c4cb6f620484998b8c498667d88b, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

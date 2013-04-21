@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2223f37ed3b90c46b7de7dbe31854bf, type: 1}
+  m_Name: Dummy
+  _Prefab: {fileID: 0}
+  _Icon: {fileID: 0}
+  _Radius: .5
+  _Height: 2
+  _TurnRate: 360
+  _MoveRate: 0
+  _AccelRate: 20
+  _Health: 150
+  _Generators: []
+  _Abilities: []
+  _Weapon: {fileID: 0}

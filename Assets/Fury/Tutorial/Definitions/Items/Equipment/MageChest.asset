@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40dacadb070e338478494fd11d24424f, type: 1}
+  m_Name: MageChest
+  Icon: {fileID: 2800000, guid: 43f737f08abe4fa43a3931d4ae190005, type: 1}
+  ItemModel: caster-chest
+  ItemGroup: -chest
+  Intelligence: 10
+  Strength: 2

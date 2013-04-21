@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d883b01600d5d0546805f17cb6d42c59, type: 1}
+  m_Name: SmallHealthPot
+  Icon: {fileID: 2800000, guid: 15d8e49294234d846af5c219be49a20c, type: 1}
+  ReplenishAmount: 50

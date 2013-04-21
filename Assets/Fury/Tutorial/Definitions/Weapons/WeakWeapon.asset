@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 63531749, guid: b94fcd4974c1db34db241cf43ef2a514, type: 1}
+  m_Name: WeakWeapon
+  _Mobile: 0
+  _Range: .5
+  _PreDelay: .25
+  _PostDelay: .25
+  _Cooldown: 1
+  _Damage: 10

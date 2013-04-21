@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40dacadb070e338478494fd11d24424f, type: 1}
+  m_Name: WarriorLegs
+  Icon: {fileID: 2800000, guid: 5a45574d19822f14bba4e613c76d6408, type: 1}
+  ItemModel: armored-legs
+  ItemGroup: -legs
+  Intelligence: 2
+  Strength: 10

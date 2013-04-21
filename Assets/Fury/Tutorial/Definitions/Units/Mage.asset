@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2004024942, guid: b94fcd4974c1db34db241cf43ef2a514, type: 1}
+  m_Name: Mage
+  _Prefab: {fileID: 100164, guid: 8e6fddffc28bbb1489a625357d2a8afb, type: 2}
+  _Icon: {fileID: 0}
+  _Radius: .5
+  _Height: 1.70000005
+  _RegisterForTriggers: 1
+  _TurnRate: 360
+  _MoveRate: 4
+  _AccelRate: 20
+  _Health: 150
+  _Generators:
+  - {fileID: 11400000, guid: cd0104b80b79ec746a648ebfe7369fa0, type: 2}
+  _Abilities:
+  - {fileID: 11400000, guid: f79987ad8f0c062418cbaaabacfba625, type: 2}
+  - {fileID: 11400000, guid: f24ff394817ad6146a5d3de2cfc6e9bf, type: 2}
+  _Weapon: {fileID: 11400000, guid: f7074a265269c13449f75b39a4efb9c8, type: 2}

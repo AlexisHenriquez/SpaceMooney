@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad3fd05f51cab74e81d1fa1a0cf5a57, type: 1}
+  m_Name: Tower
+  _Prefab: {fileID: 100000, guid: 9cd3aabc186642842bdadd33e22b4cc1, type: 2}
+  _Icon: {fileID: 0}
+  _Radius: 1.25
+  _Height: 4
+  _RegisterForTriggers: 1
+  _TurnRate: 0
+  _MoveRate: 0
+  _AccelRate: 0
+  _Health: 150
+  _Generators: []
+  _Abilities: []
+  _Weapon: {fileID: 11400000, guid: fa68c005eec3e5d489952e125d01c881, type: 2}
+  RubblePrefab: {fileID: 0}
+  CratePrefab: {fileID: 11400000, guid: 08c6956db87d9224290b3097228b1984, type: 2}
+  LootTable:
+  - {fileID: 11400000, guid: 4849569dd29303d409d80fc2b3d87110, type: 2}
+  - {fileID: 11400000, guid: 20c732ad5a6849b4b87efdc5297b23ca, type: 2}
