@@ -17,30 +17,24 @@ public class PlayerHUD : MonoBehaviour
 
 	internal const float ShippingArrivalTime = 5F;
 
-	internal const float EnergyLoadInterval = 10F;
+	internal const float HandlingResourceInterval = 10F;
 
-	internal float EnergyLoadTime;
-
-	internal const float EnergyConsumeInterval = 10F;
-
-	internal float EnergyConsumeTime;
+	internal float HandlingResourceTime;
 
 	internal float ArrivalTime;
 
 	void Start()
 	{
-		EnergyLoadTime = EnergyLoadInterval;
-
-		EnergyConsumeTime = EnergyConsumeInterval;
+		HandlingResourceTime = HandlingResourceInterval;
 	}
 
 	public void OnGUI()
 	{
 		GUI.Button(new Rect(10, 10, 80, 30), "(C)omprar");
 
-		GUI.Button(new Rect(95, 10, 80, 30), "(I)nventario");
+		GUI.Button(new Rect(145, 10, 80, 30), "(I)nventario");
 
-		GUI.Button(new Rect(250, 10, 120, 30), "Estadísticas");
+		GUI.Button(new Rect(350, 10, 120, 30), "Estadísticas");
 
 		this.HandleBuy();
 
@@ -55,9 +49,13 @@ public class PlayerHUD : MonoBehaviour
 	{
 		if (ShowInventory)
 		{
-			GUI.Button(new Rect(95, 50, 120, 100), string.Empty);
+			GUI.Button(new Rect(145, 50, 160, 120), string.Empty);
 
-			GUI.Button(new Rect(100, 60, 110, 30), string.Format("Panel Solar: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.SolarPanel).ToString()));
+			GUI.Button(new Rect(150, 60, 110, 30), string.Format("Panel Solar: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.SolarPanel).ToString()));
+
+			GUI.Button(new Rect(150, 95, 110, 30), string.Format("Antena: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.MicrowaveAntenna).ToString()));
+
+            GUI.Button(new Rect(150, 130, 150, 30), string.Format("Extrac. de oxigeno: {0}", this.PlayerStats.GetInventoryAmountOf(Buyables.OxygenExtractor).ToString()));
 		}
 	}
 
@@ -70,6 +68,8 @@ public class PlayerHUD : MonoBehaviour
 
 			if (!ShowBuyMenu)
 			{
+				this.PlayerStats.Player.Restore(this.PlayerStats.BuyingInventory);
+
 				this.PlayerStats.ResetBuyables();
 			}
 		}
@@ -77,6 +77,10 @@ public class PlayerHUD : MonoBehaviour
 		if (ShowBuyMenu)
 		{
 			this.HandleBuySolarPanel();
+
+			this.HandleBuyMicrowaveAntenna();
+
+            this.HandleBuyOxygenExtractor();
 		}
 
 		if (Input.GetKeyDown(KeyCode.I))
@@ -89,44 +93,33 @@ public class PlayerHUD : MonoBehaviour
 
 	public void HandleResources()
 	{
-		this.HandleLoadEnergy();
+		HandlingResourceTime -= Time.deltaTime;
 
-		this.HandleConsumeEnergy();
-
-		GUI.Button(new Rect(250, 50, 150, 100), string.Empty);
-
-		GUI.Button(new Rect(255, 60, 140, 30), string.Format("Presupuesto: {0}", this.PlayerStats.Player.Budget));
-
-		GUI.Button(new Rect(255, 95, 140, 30), string.Format("Energía: {0}", this.PlayerStats.TotalEnergy));
-	}
-
-	public void HandleConsumeEnergy()
-	{
-		EnergyConsumeTime -= Time.deltaTime;
-
-		if (EnergyConsumeTime <= 0)
+		if (HandlingResourceTime <= 0)
 		{
+			this.PlayerStats.DegradateObjects();
+
 			this.PlayerStats.ConsumeEnergy();
 
-			EnergyConsumeTime = EnergyConsumeInterval;
+			this.PlayerStats.ExtractResources();
+
+			this.PlayerStats.ManageIncomes();
+
+			HandlingResourceTime = HandlingResourceInterval;
 		}
-	}
 
-	public void HandleLoadEnergy()
-	{
-		EnergyLoadTime -= Time.deltaTime;
+		GUI.Button(new Rect(350, 50, 150, 120), string.Empty);
 
-		if (EnergyLoadTime <= 0)
-		{
-			this.PlayerStats.LoadEnergy();
+		GUI.Button(new Rect(355, 60, 140, 30), string.Format("Presupuesto: {0}", this.PlayerStats.Player.Budget));
 
-			EnergyLoadTime = EnergyLoadInterval;
-		}
+		GUI.Button(new Rect(355, 95, 140, 30), string.Format("Energía: {0}", this.PlayerStats.TotalEnergy));
+
+        GUI.Button(new Rect(355, 130, 140, 30), string.Format("Oxigeno: {0}", this.PlayerStats.TotalOxygen));
 	}
 
 	public void HandleBuyConfirm()
 	{
-		if (Input.GetKeyDown(KeyCode.Return))
+		if (Input.GetKeyDown(KeyCode.Return) && !ShippingInProgress)
 		{
 			ShowBuyMenu = false;
 
@@ -141,9 +134,13 @@ public class PlayerHUD : MonoBehaviour
 		if (ShowBuyMenu &&
 			!ShippingInProgress)
 		{
-			GUI.Button(new Rect(10, 50, 120, 100), string.Empty);
+			GUI.Button(new Rect(10, 50, 120, 150), string.Empty);
 
 			GUI.Button(new Rect(15, 60, 110, 30), string.Format("(P)anel Solar: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.SolarPanel).ToString()));
+
+			GUI.Button(new Rect(15, 95, 110, 30), string.Format("A(n)tena: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.MicrowaveAntenna).ToString()));
+			
+			GUI.Button(new Rect(15, 130, 110, 30), string.Format("(E)xtrac. O2: {0}", this.PlayerStats.GetBuyingAmountOf(Buyables.OxygenExtractor).ToString()));
 		}
 	}
 
@@ -181,5 +178,21 @@ public class PlayerHUD : MonoBehaviour
 			this.PlayerStats.Buy(Buyables.SolarPanel, 1);
 		}
 	}
+
+	public void HandleBuyMicrowaveAntenna()
+	{
+		if (Input.GetKeyDown(KeyCode.N))
+		{
+			this.PlayerStats.Buy(Buyables.MicrowaveAntenna, 1);
+		}
+	}
+
+    public void HandleBuyOxygenExtractor()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            this.PlayerStats.Buy(Buyables.OxygenExtractor, 1);
+        }
+    }
 
 }

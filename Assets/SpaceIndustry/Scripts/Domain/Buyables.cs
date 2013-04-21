@@ -6,6 +6,8 @@ using System.Text;
 public enum Buyables
 {
 
-	SolarPanel
+	SolarPanel,
+	MicrowaveAntenna,
+	OxygenExtractor
 
 }

@@ -17,11 +17,17 @@ public class PlayerStats : MonoBehaviour
 
 	public IList<Buildable> EnergyConsumers;
 
+	public IList<OxygenExtractor> OxygenExtractors;
+
+	public IList<MicrowaveAntenna> MicrowaveAntennas;
+
 	public Robonauta Robonauta;
 
 	public Player Player;
 
 	public int TotalEnergy = 100;
+
+	public int TotalOxygen = 0;
 
 	void Start()
 	{
@@ -31,11 +37,15 @@ public class PlayerStats : MonoBehaviour
 
 		this.SolarPanels = new List<SolarPanel>();
 
+		this.OxygenExtractors = new List<OxygenExtractor>();
+
+		this.MicrowaveAntennas = new List<MicrowaveAntenna>();
+
 		this.Robonauta = new Robonauta();
 
 		this.EnergyConsumers = new List<Buildable>() { this.Robonauta };
 
-		this.Player = new Player() { Budget = 100 };
+		this.Player = new Player() { Budget = 1000 };
 
 		foreach (var item in BuyablesArray)
 		{
@@ -47,6 +57,13 @@ public class PlayerStats : MonoBehaviour
 
 	public bool Buy(Buyables objectToBuy, int cantidad)
 	{
+		if (objectToBuy == Buyables.MicrowaveAntenna || objectToBuy == Buyables.OxygenExtractor)
+		{
+			if (this.BuyingInventory[objectToBuy] >= 1)
+			{
+				return false;
+			}
+		}
 		bool canBuy = this.Player.HasBudgetToBuy(objectToBuy, cantidad);
 
 		if (canBuy)
@@ -55,9 +72,6 @@ public class PlayerStats : MonoBehaviour
 
 			this.Player.DiscountTotalPrice(objectToBuy, cantidad);
 		}
-
-		//if (GetBuyingAmountOf(objectToBuy) < 0)
-		//    this.BuyingInventory[objectToBuy] = 0;
 
 		return canBuy;
 	}
@@ -93,22 +107,119 @@ public class PlayerStats : MonoBehaviour
 		}
 	}
 
-	public void AddSolarPanel()
+	public Buildable AddSolarPanel(GameObject clone)
 	{
-		this.SolarPanels.Add(new SolarPanel());
+		SolarPanel newSolarPanel = new SolarPanel(clone);
+		this.SolarPanels.Add(newSolarPanel);
+		newSolarPanel.Id = this.SolarPanels.Count - 1;
+		return newSolarPanel;
 	}
 
-	public void LoadEnergy()
+	public Buildable AddOxygenExtractor(GameObject clone)
+	{
+		OxygenExtractor newOxygenExtractor = new OxygenExtractor(clone);
+
+		this.OxygenExtractors.Add(newOxygenExtractor);
+
+		this.EnergyConsumers.Add(newOxygenExtractor);
+		newOxygenExtractor.Id = this.OxygenExtractors.Count - 1;
+		return newOxygenExtractor;
+	}
+
+	public void ExtractResources()
 	{
 		if (this.SolarPanels.Any())
 		{
 			this.TotalEnergy += this.SolarPanels.Sum(c => c.Energy);
 		}
+		if (this.OxygenExtractors.Any())
+		{
+			this.TotalOxygen += this.OxygenExtractors.Sum(c => c.Oxygen);
+		}
 	}
 
 	public void ConsumeEnergy()
 	{
-		this.TotalEnergy -= this.Robonauta.GetConsumeEnergyFactor();
+		this.TotalEnergy -= this.EnergyConsumers.Sum(c => c.GetConsumeEnergyFactor());
 	}
 
+	public void DegradateObjects()
+	{
+		if (this.SolarPanels.Any())
+		{
+			foreach (var item in this.SolarPanels)
+			{
+				item.Degradate();
+			}
+
+			var deadSolarPanels = this.SolarPanels.Where(s => s.IsDead).ToList();
+
+			foreach (var item in deadSolarPanels)
+			{
+				Destroy(item.gameObject);
+			}
+
+			this.SolarPanels = this.SolarPanels.Where(s => !s.IsDead).ToList();
+		}
+	}
+
+	public void ManageIncomes()
+	{
+		if (this.MicrowaveAntennas.Any())
+		{
+			this.Player.Budget += this.MicrowaveAntennas.Sum(c => c.GetIncome());
+		}
+	}
+
+	public void ExtractOxygen()
+	{
+		if (OxygenExtractors.Any())
+		{
+			this.TotalOxygen += this.OxygenExtractors.Sum(c => c.Oxygen);
+		}
+	}
+
+	public Buildable AddMicrowaveAntenna(GameObject clone)
+	{
+		MicrowaveAntenna newMicrowaveAntenna = new MicrowaveAntenna(clone);
+
+		this.MicrowaveAntennas.Add(newMicrowaveAntenna);
+		newMicrowaveAntenna.Id = this.MicrowaveAntennas.Count - 1;
+
+		this.EnergyConsumers.Add(newMicrowaveAntenna);
+
+		return newMicrowaveAntenna;
+	}
+
+
+	internal void removeGameObject(Buildable buildable)
+	{
+		if (buildable is SolarPanel)
+		{
+			Debug.Log("this.SolarPanels.count: " + this.SolarPanels.Count);
+			var objectToRemove = this.SolarPanels.SingleOrDefault(c => c.Id == buildable.Id);
+			this.SolarPanels.Remove(objectToRemove);
+		}
+		if (buildable is OxygenExtractor)
+		{
+			var objectToRemove = this.OxygenExtractors.SingleOrDefault(c => c.Id == buildable.Id);
+			this.OxygenExtractors.Remove(objectToRemove);
+		}
+		if (buildable is MicrowaveAntenna)
+		{
+			var objectToRemove = this.MicrowaveAntennas.SingleOrDefault(c => c.Id == buildable.Id);
+			this.MicrowaveAntennas.Remove(objectToRemove);
+		}
+		var buildableToRemove = this.EnergyConsumers.SingleOrDefault(c => c.Id == buildable.Id && c is MicrowaveAntenna);
+		if (buildableToRemove != null)
+		{
+			this.EnergyConsumers.Remove(buildableToRemove);
+		}
+		buildableToRemove = this.EnergyConsumers.SingleOrDefault(c => c.Id == buildable.Id && c is OxygenExtractor);
+		if (buildableToRemove != null)
+		{
+			this.EnergyConsumers.Remove(buildableToRemove);
+		}
+
+	}
 }

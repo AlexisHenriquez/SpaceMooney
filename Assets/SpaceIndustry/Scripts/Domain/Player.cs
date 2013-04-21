@@ -1,33 +1,96 @@
+using System.Collections.Generic;
 
 public class Player
 {
 
 	public int Budget { get; set; }
 
-	private static int GetTotalPrice(int cantidad)
+	private static int GetTotalPriceSolarPanel(int cantidad)
 	{
 		return cantidad * SolarPanel.PRICE_SOLAR_PANEL;
 	}
 
+	private static int GetTotalPriceOxygenExtractor(int cantidad)
+	{
+		return cantidad * OxygenExtractor.PRICE_OXYGEN_EXTRACTOR;
+	}
+
+	private static int GetTotalPriceMicrowaveAntenna(int cantidad)
+	{
+		return cantidad * MicrowaveAntenna.BUY_PRICE;
+	}
+
 	public bool HasBudgetToBuy(Buyables objectToBuy, int cantidad)
 	{
+		int totalPrice = 0;
+
 		if (objectToBuy == Buyables.SolarPanel)
 		{
-			int totalPrice = GetTotalPrice(cantidad);
-
-			return totalPrice <= this.Budget;
+			totalPrice = GetTotalPriceSolarPanel(cantidad);
+		}
+        
+		if (objectToBuy == Buyables.OxygenExtractor)
+        {
+            totalPrice = GetTotalPriceOxygenExtractor(cantidad);
 		}
 
-		return false;
+		if (objectToBuy == Buyables.MicrowaveAntenna)
+		{
+			totalPrice = GetTotalPriceMicrowaveAntenna(cantidad);
+		}
+
+		return totalPrice <= this.Budget;
 	}
 
 	public void DiscountTotalPrice(Buyables objectToBuy, int cantidad)
 	{
+		int totalPrice = 0;
+
 		if (objectToBuy == Buyables.SolarPanel)
 		{
-			int totalPrice = GetTotalPrice(cantidad);
+			totalPrice = GetTotalPriceSolarPanel(cantidad);
+		}
+        
+		if (objectToBuy == Buyables.OxygenExtractor)
+        {
+			totalPrice = GetTotalPriceOxygenExtractor(cantidad);
+		}
 
-			this.Budget -= totalPrice;
+		if (objectToBuy == Buyables.MicrowaveAntenna)
+		{
+			totalPrice = GetTotalPriceMicrowaveAntenna(cantidad);
+		}
+
+		this.Budget -= totalPrice;
+	}
+
+	public void RestoreTotalPrice(Buyables objectToBuy, int cantidad)
+	{
+		int totalPrice = 0;
+
+		if (objectToBuy == Buyables.SolarPanel)
+		{
+			totalPrice = GetTotalPriceSolarPanel(cantidad);
+		}
+
+		if (objectToBuy == Buyables.OxygenExtractor)
+		{
+			totalPrice = GetTotalPriceOxygenExtractor(cantidad);
+		}
+
+		if (objectToBuy == Buyables.MicrowaveAntenna)
+		{
+			totalPrice = GetTotalPriceMicrowaveAntenna(cantidad);
+		}
+
+		this.Budget += totalPrice;
+	}
+
+	public void Restore(IDictionary<Buyables, int> buyInventory)
+	{
+		foreach (var item in buyInventory)
+		{
+			this.RestoreTotalPrice(item.Key, item.Value);
 		}
 	}
 

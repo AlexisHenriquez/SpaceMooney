@@ -1,0 +1,3 @@
+<../images/solar-panel1noCulling.jpg> <../images/solar-panel1noCulling.jpg>
+<../images/solar-panel2noCulling.jpg> <../images/solar-panel2noCulling.jpg>
+<../images/solar-panelnoCulling.jpg> <../images/solar-panelnoCulling.jpg>
